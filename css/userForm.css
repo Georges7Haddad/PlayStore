@@ -1,0 +1,57 @@
+#userFormDiv {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 26%;
+  top: 10%;
+  width: 33%;
+  height: 580px;
+  overflow: auto;
+  background-color: teal;
+  padding-top: 100px;
+  padding-left: 150px;
+}
+#userForm {
+  margin: auto;
+  height: 100px;
+  width: 500px;
+}
+#usernameInput,
+#passwordInput {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 330px;
+  height: 30px;
+}
+#userFormDiv h1 {
+  margin-left: 80px;
+}
+#userFormDiv img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 30px;
+  margin-left: 110px;
+}
+#userFormButton {
+  width: 150px;
+  height: 35px;
+  margin: 40px 90px;
+  border: teal;
+  border-radius: 10px;
+}
+
+#userFormDiv a {
+  margin-left: 50px;
+}
+#closeModal {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: black;
+  font-size: 36px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+#closeModal:hover {
+  color: #f1f1f1;
+}
