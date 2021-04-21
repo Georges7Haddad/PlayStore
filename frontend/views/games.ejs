@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/userForm.css" />
+    <script src="js/index.js"></script>
+    <link rel="shortcut icon" href="media/logo_transparent_big.png" type="image/png">
+    <title>Play Store</title>
+</head>
+
+<body>
+    <%- include('navbar')%>
+        <ul>
+            <% for (var i=0;i<games.length;i++) {%>
+                <li>
+                    <%=games[i].name%>
+                </li>
+                <%}%>
+        </ul>
+
+        <div id="userFormDiv">
+            <a href="#" id="closeModal">&times;</a>
+            <h1>Play Store</h1>
+            <img src="media/logo_transparent_big.png" alt="logo">
+            <form id="userForm" action="">
+                <label for="usernameInput">Username</label><br>
+                <input id="usernameInput" placeholder="Username" type="text"><br>
+                <label for="passwordInput">Password</label><br>
+                <input id="passwordInput" placeholder="Password" type="password"><br>
+                <div id="loginExtrasDiv">
+                    <input type="checkbox" checked id="remembermeCheck">
+                    <label for="remembermeCheck">Remember Me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <button id="userFormButton"></button>
+            </form>
+        </div>
+
+        <div id="content">
+
+        </div>
+</body>
+
+</html>
