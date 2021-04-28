@@ -11,16 +11,14 @@
 
 <body>
     <%- include('navbar')%>
-        <ul>
-            <% for (var i=0;i<books.length;i++) {%>
-                <li>
-                    <%=books[i]%>
-                </li>
-                <%}%>
-        </ul>
-
         <div id="content">
-
+            <ul>
+                <% for (var i=0;i<wishlist.length;i++) {%>
+                    <li>
+                        <%=wishlist[i]%>
+                    </li>
+                    <%}%>
+            </ul>
         </div>
 </body>
 
