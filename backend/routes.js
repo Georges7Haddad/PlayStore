@@ -73,6 +73,41 @@ module.exports = function (app, path) {
         res.render(`../../frontend/views/item`, { item: item });
       });
   });
+
+  // Add item to wishlist
+  app.post("/user/:username/wishlist", (req, res) => {
+    let username = req.params.username;
+    let item = req.body.item;
+    User.findOne({ username: username }).then((user) => {
+      user.wishlist.push(item);
+      user.save();
+      res.send("Added to wishlist");
+    });
+  });
+
+  // Get user's wishlist
+  app.get("/user/:username/wishlist", (req, res) => {
+    let wishlist = [];
+    let username = req.params.username;
+    User.findOne({ username: username })
+      .then((user) => {
+        for (let i = 0; i < user.wishlist.length; i++) {
+          eval(user.wishlist[i].itemType)
+            .findOne({
+              _id: ObjectID(user.wishlist[i].id),
+            })
+            .then((item) => {
+              wishlist.push(item);
+            });
+        }
+      })
+      .then(() => {
+        console.log(wishlist);
+        res.render("../../frontend/views/wishlist.ejs", {
+          wishlist: wishlist,
+        });
+      });
+  });
 };
 
 function getTopSelling(model, itemType, res) {

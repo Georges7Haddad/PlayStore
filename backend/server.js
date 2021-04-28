@@ -5,6 +5,7 @@ var app = express();
 var port = 8080;
 app.use(express.static(path.resolve("../frontend"))); // Specify the static files folder
 app.set("view engine", "ejs"); // Set the view engine to ejs
+app.use(express.json());
 
 var connectionString =
   "mongodb://georgeshaddad:1234@cluster0-shard-00-00.smhyu.mongodb.net:27017,cluster0-shard-00-01.smhyu.mongodb.net:27017,cluster0-shard-00-02.smhyu.mongodb.net:27017/PlaystoreDB?ssl=true&replicaSet=atlas-1gvw6r-shard-0&authSource=admin&retryWrites=true&w=majority";
