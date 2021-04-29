@@ -10,7 +10,7 @@ const Game = mongoose.model("Game", schemas.gamesSchema);
 const Movie = mongoose.model("Movie", schemas.moviesSchema);
 const Book = mongoose.model("Book", schemas.booksSchema);
 
-module.exports = function (app, path) {
+module.exports = function (app) {
   app.get("/addData", (req, res) => {
     // Add data to the DB from data.json
     addData();
@@ -19,7 +19,7 @@ module.exports = function (app, path) {
   });
 
   app.get("/", (req, res) => {
-    res.render(path.resolve("../frontend/views/home"));
+    res.render("../../frontend/views/home");
   });
 
   app.get("/applications", (req, res) => {
@@ -34,6 +34,10 @@ module.exports = function (app, path) {
     getTopSelling(Application, "applications", res);
   });
 
+  app.get("/applications/newestReleases", (req, res) => {
+    getNewestReleases(Application, "applications", res);
+  });
+
   app.get("/games", (req, res) => {
     Game.find().then((games) => {
       res.render("../../frontend/views/games", { games: games });
@@ -41,7 +45,11 @@ module.exports = function (app, path) {
   });
 
   app.get("/games/topSelling", (req, res) => {
-    getTopSelling(Application, "applications", res);
+    getTopSelling(Game, "games", res);
+  });
+
+  app.get("/games/newestReleases", (req, res) => {
+    getNewestReleases(Game, "games", res);
   });
 
   app.get("/movies", (req, res) => {
@@ -50,8 +58,12 @@ module.exports = function (app, path) {
     });
   });
 
-  app.get("/games/topSelling", (req, res) => {
-    getTopSelling(Game, "games", res);
+  app.get("/movies/topSelling", (req, res) => {
+    getTopSelling(Movie, "movies", res);
+  });
+
+  app.get("/movies/newestReleases", (req, res) => {
+    getNewestReleases(Movie, "movies", res);
   });
 
   app.get("/books", (req, res) => {
@@ -64,6 +76,10 @@ module.exports = function (app, path) {
     getTopSelling(Book, "books", res);
   });
 
+  app.get("/books/newestReleases", (req, res) => {
+    getNewestReleases(Book, "books", res);
+  });
+
   app.get("/item", (req, res) => {
     let itemType = req.query.itemType;
     let itemId = req.query.itemId;
@@ -71,6 +87,40 @@ module.exports = function (app, path) {
       .find({ _id: ObjectID(itemId) })
       .then((item) => {
         res.render(`../../frontend/views/item`, { item: item });
+      });
+  });
+
+  // Add item to last 24 visited
+  app.post("/user/:username/last24VisitedItems", (req, res) => {
+    let username = req.params.username;
+    let item = req.body.item;
+    User.findOne({ username: username }).then((user) => {
+      user.last24VisitedItems.push(item);
+      user.save();
+      res.send("Added to last 24 visited");
+    });
+  });
+
+  // Get user's last 24 visited items
+  app.get("/user/:username/last24VisitedItems", (req, res) => {
+    let last24VisitedItems = [];
+    let username = req.params.username;
+    User.findOne({ username: username })
+      .then(async (user) => {
+        for (let i = 0; i < user.last24VisitedItems.length; i++) {
+          await eval(user.last24VisitedItems[i].itemType)
+            .findOne({
+              _id: ObjectID(user.last24VisitedItems[i].id),
+            })
+            .then((item) => {
+              last24VisitedItems.push(item);
+            });
+        }
+      })
+      .then(() => {
+        res.render("../../frontend/views/wishlist", {
+          wishlist: last24VisitedItems,
+        });
       });
   });
 
@@ -90,9 +140,9 @@ module.exports = function (app, path) {
     let wishlist = [];
     let username = req.params.username;
     User.findOne({ username: username })
-      .then((user) => {
+      .then(async (user) => {
         for (let i = 0; i < user.wishlist.length; i++) {
-          eval(user.wishlist[i].itemType)
+          await eval(user.wishlist[i].itemType)
             .findOne({
               _id: ObjectID(user.wishlist[i].id),
             })
@@ -102,13 +152,24 @@ module.exports = function (app, path) {
         }
       })
       .then(() => {
-        console.log(wishlist);
-        res.render("../../frontend/views/wishlist.ejs", {
+        res.render("../../frontend/views/wishlist", {
           wishlist: wishlist,
         });
       });
   });
 };
+
+function getNewestReleases(model, itemType, res) {
+  model
+    .find()
+    .sort("-dateOfRelease")
+    .limit(10)
+    .then((items) => {
+      res.render(`../../frontend/views/${itemType}`, {
+        [itemType]: items,
+      });
+    });
+}
 
 function getTopSelling(model, itemType, res) {
   model

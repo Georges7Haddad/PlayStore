@@ -15,7 +15,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    require("./routes")(app, path); // Connect routes file
+    require("./routes")(app); // Connect routes file
     console.log("Connected to DB");
   })
   .catch((err) => {
