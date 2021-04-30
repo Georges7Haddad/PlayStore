@@ -23,6 +23,7 @@ function openLoginDialog() {
   $("userFormDiv").style.display = "block";
   $("loginExtrasDiv").style.display = "";
   $("userFormButton").innerText = "Login";
+  $('userForm').action = "/login";
 }
 
 function opensignupDialog() {
@@ -31,6 +32,7 @@ function opensignupDialog() {
   $("userFormDiv").style.display = "block";
   $("userFormButton").innerText = "Sign Up";
   $("loginExtrasDiv").style.display = "none";
+  $('userForm').action = "/register";
 }
 
 window.onclick = function (event) {

@@ -11,12 +11,53 @@ const Movie = mongoose.model("Movie", schemas.moviesSchema);
 const Book = mongoose.model("Book", schemas.booksSchema);
 
 module.exports = function (app) {
+  
   app.get("/addData", (req, res) => {
     // Add data to the DB from data.json
     addData();
     // deleteAllRecords(); // DELETE ALL RECORDS (used for testing)
     res.send("Data Added");
   });
+
+  passport.serializeUser(User.serializeUser());       //session encoding
+  passport.deserializeUser(User.deserializeUser());   //session decoding
+  passport.use(new LocalStrategy(User.authenticate()));
+  app.use(bodyParser.urlencoded(
+        { extended:true }
+  ))
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  app.post("/login",passport.authenticate("local",{
+    successRedirect:"/",
+    failureRedirect:"/"
+  }),function (req, res){
+  });
+
+  app.post("/register",(req,res)=>{
+    
+    User.register(new User({username: req.body.username, profilePicture: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}),req.body.password,function(err,user){
+    if(err){
+        console.log(err);
+        res.render("../../frontend/views/home");
+    }
+    passport.authenticate("local")(req,res,function(){
+        res.redirect("/");
+    })   
+    })
+  })
+
+  app.get("/logout",(req,res)=>{
+    req.logout();
+    res.redirect("/");
+  });
+
+  function isLoggedIn(req,res,next) {
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+  }
 
   app.get("/", (req, res) => {
     res.render("../../frontend/views/home", {});

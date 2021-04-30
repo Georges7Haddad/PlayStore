@@ -1,0 +1,8 @@
+express
+ejs
+body-parser
+express-session
+mongoose
+passport
+passport-local
+passport-local-mongoose

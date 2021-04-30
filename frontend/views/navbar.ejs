@@ -22,11 +22,11 @@
     <a href="#" id="closeModal">&times;</a>
     <h1>Play Store</h1>
     <img src="/media/logo_transparent_big.png" alt="logo">
-    <form id="userForm" action="">
-        <label for="usernameInput">Username</label><br>
-        <input id="usernameInput" placeholder="Username" type="text"><br>
-        <label for="passwordInput">Password</label><br>
-        <input id="passwordInput" placeholder="Password" type="password"><br>
+    <form id="userForm" method="POST">
+        <label for="username">Username</label><br>
+        <input id="username" placeholder="Username" type="text" name="username"><br>
+        <label for="password">Password</label><br>
+        <input id="password" placeholder="Password" type="password" name="password"><br>
         <div id="loginExtrasDiv">
             <input type="checkbox" checked id="remembermeCheck">
             <label for="remembermeCheck">Remember Me</label>
