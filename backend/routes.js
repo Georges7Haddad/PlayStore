@@ -19,13 +19,16 @@ module.exports = function (app) {
   });
 
   app.get("/", (req, res) => {
-    res.render("../../frontend/views/home");
+    res.render("../../frontend/views/home", {});
   });
 
   app.get("/applications", (req, res) => {
     Application.find().then((applications) => {
-      res.render("../../frontend/views/applications", {
-        applications: applications,
+      User.findOne({ username: "Bleast" }).then((user) => {
+        res.render("../../frontend/views/applications", {
+          applications: applications,
+          wishlist: user.wishlist.map((item) => item.id),
+        });
       });
     });
   });
@@ -40,7 +43,12 @@ module.exports = function (app) {
 
   app.get("/games", (req, res) => {
     Game.find().then((games) => {
-      res.render("../../frontend/views/games", { games: games });
+      User.findOne({ username: "Bleast" }).then((user) => {
+        res.render("../../frontend/views/games", {
+          games: games,
+          wishlist: user.wishlist.map((item) => item.id),
+        });
+      });
     });
   });
 
@@ -54,7 +62,12 @@ module.exports = function (app) {
 
   app.get("/movies", (req, res) => {
     Movie.find().then((movies) => {
-      res.render("../../frontend/views/movies", { movies: movies });
+      User.findOne({ username: "Bleast" }).then((user) => {
+        res.render("../../frontend/views/movies", {
+          movies: movies,
+          wishlist: user.wishlist.map((item) => item.id),
+        });
+      });
     });
   });
 
@@ -68,7 +81,12 @@ module.exports = function (app) {
 
   app.get("/books", (req, res) => {
     Book.find().then((books) => {
-      res.render("../../frontend/views/books", { books: books });
+      User.findOne({ username: "Bleast" }).then((user) => {
+        res.render("../../frontend/views/books", {
+          books: books,
+          wishlist: user.wishlist.map((item) => item.id),
+        });
+      });
     });
   });
 
@@ -127,11 +145,30 @@ module.exports = function (app) {
   // Add item to wishlist
   app.post("/user/:username/wishlist", (req, res) => {
     let username = req.params.username;
-    let item = req.body.item;
+    let item = req.body;
     User.findOne({ username: username }).then((user) => {
-      user.wishlist.push(item);
-      user.save();
-      res.send("Added to wishlist");
+      let index = user.wishlist.findIndex((element) => element.id === item.id);
+      if (index === -1) {
+        user.wishlist.push(item);
+        user.save();
+        res.send("Added to wishlist");
+      }
+      res.send("Duplicate");
+    });
+  });
+
+  // Delete item from wishlist
+  app.delete("/user/:username/wishlist", (req, res) => {
+    let username = req.params.username;
+    let itemId = req.body.id;
+    User.findOne({ username: username }).then((user) => {
+      let index = user.wishlist.findIndex((element) => element.id === itemId);
+      if (index > -1) {
+        user.wishlist.splice(index, 1);
+        user.save();
+        res.send("Removed from wishlist");
+      }
+      res.send("Not Found");
     });
   });
 
@@ -210,11 +247,11 @@ function addData() {
     books = data["books"];
     applications = data["applications"];
     games = data["games"];
-    addItems(users, User);
-    addItems(reviews, Review);
-    addItems(books, Book);
-    addItems(movies, Movie);
-    addItems(games, Game);
+    // addItems(users, User);
+    // addItems(reviews, Review);
+    // addItems(books, Book);
+    // addItems(movies, Movie);
+    // addItems(games, Game);
     addItems(applications, Application);
   });
 }

@@ -1,16 +1,14 @@
-import { fetchCountry } from "./footer.js";
 function $(id) {
   return document.getElementById(id);
 }
 
-window.onload = () => {
-  // fetchCountry(); // Turn on to fetch the country
+window.addEventListener("load", () => {
   $("sidebarIconAnchor").addEventListener("click", openSideNav);
   $("sidebarCloseButton").addEventListener("click", closeSideNav);
   $("loginNavButton").addEventListener("click", openLoginDialog);
   $("signupNavButton").addEventListener("click", opensignupDialog);
   $("closeModal").addEventListener("click", closeUserFormDialog);
-};
+});
 
 function openSideNav() {
   $("sidebar").style.width = "250px";
