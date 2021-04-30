@@ -1,0 +1,106 @@
+{
+    "users": [
+        {
+            "username": "Bleast",
+            "password": "admin",
+            "profilePicture": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.postplanner.com%2Fhs-fs%2Fhub%2F513577%2Ffile-2886416984-png%2Fblog-files%2Ffacebook-profile-pic-vs-cover-photo-sq.png%3Fwidth%3D250%26height%3D250%26name%3Dfacebook-profile-pic-vs-cover-photo-sq.png&imgrefurl=https%3A%2F%2Fwww.postplanner.com%2Ffacebook-profile-picture-more-important-than-cover-photo-for-pages%2F&tbnid=nyFMOkQaK3q9eM&vet=12ahUKEwiY07OwuJTwAhUQ2xoKHYTBDW8QMyggegUIARCZAg..i&docid=DFlrvMtp2WJ07M&w=250&h=250&q=profile%20picture&ved=2ahUKEwiY07OwuJTwAhUQ2xoKHYTBDW8QMyggegUIARCZAg",
+            "wishlist": [
+                {
+                    "itemType": "Movie",
+                    "id": "alijfo240jf209fu20"
+                }
+            ],
+            "last24VisitedItems": [
+                {
+                    "itemType": "Book",
+                    "id": "lkn982r0hf02hg0fh24"
+                }
+            ]
+        }
+    ],
+    "reviews": [
+        {
+            "user": "Bleast",
+            "rating": 7.6,
+            "text": "Excellent",
+            "itemId": "lfajnfjn240fing02ign01n",
+            "likes": [
+                "Bleast"
+            ],
+            "reports": 1
+        }
+    ],
+    "movies": [
+        {
+            "title": "Jumanji: Welcome to the Jungle",
+            "genre": "Action and Adventure",
+            "copiesSold": 59109,
+            "price": 3,
+            "image": "https://play-lh.googleusercontent.com/HjF5AQGaHCptfrLnOBj3wBqkmEJyWHjLKzwwufL0G2JDXWmnpIciZpx9zUMZgvzOrnNe=w160-h230-rw",
+            "averageRating": 7.9,
+            "trailerLink": "https://play.google.com/video/lava/web/player/yt:movie:D7snEURz8uY?autoplay=1&authuser=0&embed=play",
+            "castAndCredits": {
+                "actors": [
+                    "Dwayne Johnson",
+                    "Jack Black",
+                    "Kevin Hart",
+                    "Karen Gillan",
+                    "Nick Jonas",
+                    "Bobby Cannavale",
+                    "Ser'darius Blain",
+                    "Madison Iseman",
+                    "Morgan Turner",
+                    "Alex Wolff",
+                    "Rhys Darby",
+                    "Marc Evan Jackson"
+                ],
+                "producers": [
+                    "Matt Tolmach",
+                    "William Teitler"
+                ],
+                "Director": "Jake Kasdan"
+            },
+            "description": "Four teenagers in detention discover an old video console with a game they’ve never heard of. When they decide to play, they are immediately sucked into the jungle world of Jumanji in the bodies of their avatars (Dwayne Johnson, Jack Black, Kevin Hart, and Karen Gillan). They’ll have to complete the adventure of their lives filled with fun, thrills and danger or be stuck in the game forever!",
+            "reviews": []
+        }
+    ],
+    "books": [
+        {
+            "title": "Harry Potter",
+            "author": "J.K. Rowling",
+            "genre": "Genre",
+            "copiesSold": 2500,
+            "price": 25,
+            "image": "https://play-lh.googleusercontent.com/Vc-gzDxa1D2XaoAjg8CAhP8CPrkP0kyHRM0H5kTIiSMzsQIaIIxJDZXYNJq0g2vqI1I=w160-h230-rw",
+            "averageRating": 9.4,
+            "description": "Harry, Ron and Hermione set out on their perilous mission to track down and destroy the Horcruxes the keys to Voldemort's immortality. On their own, without the guidance or protection of their professors, the three friends must now rely on one another more than ever. But there are Dark Forces in their midst that threaten to tear them apart. Meanwhile, the Wizarding world has become a dangerous place for all enemies of the Dark Lord. The long-feared war has begun and Voldemort's Death Eaters seize control of the Ministry of Magic and even Hogwarts, terrorizing and arresting anyone who might oppose them. But the one prize they still seek is the one most valuable to Voldemort: Harry Potter. Harry's only hope is to find the Horcruxes before Voldemort finds him. But as he searches for clues, he uncovers an old and almost forgotten tale--the legend of the Deathly Hallows. MPAA Rating: PG-13 © 2010 Warner Bros. Entertainment Inc. All Rights Reserved. Harry Potter Publishing Rights © J.K. Rowling. Harry Potter characters, names and related indicia are trademarks of and © Warner Bros. Entertainment Inc. All Rights Reserved.",
+            "reviews": []
+        }
+    ],
+    "games": [
+        {
+            "title": "Among Us",
+            "creator": "WE",
+            "genre": "Genre",
+            "copiesSold": 3402,
+            "price": 0,
+            "image": "https://play-lh.googleusercontent.com/VHB9bVB8cTcnqwnu0nJqKYbiutRclnbGxTpwnayKB4vMxZj8pk1220Rg-6oQ68DwAkqO=s128-rw",
+            "averageRating": 8.8,
+            "description": "Play online or over local WiFi with 4-10 players as you attempt to prep your spaceship for departure, but beware as one will be an impostor bent on killing everyone! Crewmates can win by completing all tasks or discovering and voting the impostor off the ship. The Impostor can use sabotage to cause chaos, making for easier kills and better alibis.",
+            "reviews": []
+        }
+    ],
+    "applications": [
+        {
+            "title": "Forest: Stay focused",
+            "creator": "Seekrtech",
+            "genre": "Productivity",
+            "copiesSold": 149,
+            "price": 0,
+            "image": "https://play-lh.googleusercontent.com/zWZWyf9U9eSMS5PGorSUqk3GBQVqaSvliXdF7jf5hcuJVM7MVF1C555_wVzbSX6wPw=s128-rw",
+            "averageRating": 7.2,
+            "description": "Can't stop checking your phone? It's time to take back control and unleash your productivity with Forest, the revolutionary timer app that eliminates distractions and rebuilds your attention span in the easiest way! • Google Play 2015-2016 Best App of the Year • Google Play Editors’ Choice Top Productivity App • Google Play 2018 Best Social Impact App Nomination • 2018 Google Play Best Self-improvement app in Canada, Mexico, France, Russia, Brazil, Japan, Korea, India, and Thailand! Join 6 million satisfied users and free yourself from obsessive scrolling! Whether you're in class, at work, or just trying to get things done faster, Forest will help you put down your phone and stay focused in this world of digital distractions. 🔥 Challenge yourself to complete your tasks without touching your phone!",
+            "reviews": []
+        }
+    ]
+}

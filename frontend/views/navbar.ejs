@@ -1,16 +1,37 @@
 <nav>
-    <a href="#" id="sidebarIconAnchor"><img id="sidebarIcon" src="media/sidebarIcon.png" alt="sidebarIcon"></a>
-    <h1 id="navTitle">Play Store</h1>
-    <input id="navSearch" placeholder="Search" type="text">
+    <a href="#" id="sidebarIconAnchor"><img id="sidebarIcon" src="/media/sidebarIcon.png" alt="sidebarIcon"></a>
+    <img id="logo" src="/media/logo_transparent_big.png" alt="logo"></img>
+    <a id="navTitleLink" href="/">
+        <h1 id="navTitle">Play Store</h1>
+    </a>
+    <input id="navSearch" placeholder="Search..." type="text">
     <button class="navButtons" id="signupNavButton">Sign Up</button>
     <button class="navButtons" id="loginNavButton">Login</button>
 </nav>
 
 <div id="sidebar" class="sidenav">
     <a href="#" class="closebtn" id="sidebarCloseButton">&times;</a>
+    <a href="/">Home</a>
     <a href="/applications">Applications</a>
     <a href="/games">Games</a>
     <a href="/movies">Movies</a>
     <a href="/books">Books</a>
     <br>
+</div>
+<div id="userFormDiv">
+    <a href="#" id="closeModal">&times;</a>
+    <h1>Play Store</h1>
+    <img src="/media/logo_transparent_big.png" alt="logo">
+    <form id="userForm" method="POST">
+        <label for="username">Username</label><br>
+        <input id="username" placeholder="Username" type="text" name="username"><br>
+        <label for="password">Password</label><br>
+        <input id="password" placeholder="Password" type="password" name="password"><br>
+        <div id="loginExtrasDiv">
+            <input type="checkbox" checked id="remembermeCheck">
+            <label for="remembermeCheck">Remember Me</label>
+            <a href="#">Forgot Password?</a>
+        </div>
+        <button id="userFormButton"></button>
+    </form>
 </div>

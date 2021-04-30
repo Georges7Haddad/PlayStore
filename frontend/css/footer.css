@@ -1,0 +1,23 @@
+footer {
+  height: 120px;
+  padding: 3px;
+  background-color: black;
+  color: white;
+  margin-top: 10%;
+}
+#footerTitle {
+  text-align: center;
+}
+footer a {
+  margin-left: 15px;
+  color: white;
+}
+
+footer p {
+  display: inline;
+}
+
+footer img {
+  margin-left: 65%;
+  width: 30px;
+}

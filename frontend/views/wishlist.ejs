@@ -9,16 +9,14 @@
 
 <body>
     <%- include('navbar')%>
-        <ul>
-            <% for (var i=0;i<games.length;i++) {%>
-                <li>
-                    <%=games[i]%>
-                </li>
-                <%}%>
-        </ul>
-
         <div id="content">
-
+            <ul>
+                <% for (var i=0;i<wishlist.length;i++) {%>
+                    <li>
+                        <%=wishlist[i]%>
+                    </li>
+                    <%}%>
+            </ul>
         </div>
         <%- include('footer')%>
 </body>
