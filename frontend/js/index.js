@@ -1,18 +1,17 @@
-import { fetchCountry } from "./footer.js";
 function $(id) {
   return document.getElementById(id);
 }
 
-window.onload = () => {
-  // fetchCountry(); // Turn on to fetch the country
+window.addEventListener("load", () => {
   $("sidebarIconAnchor").addEventListener("click", openSideNav);
   $("sidebarCloseButton").addEventListener("click", closeSideNav);
   $("loginNavButton").addEventListener("click", openLoginDialog);
   $("signupNavButton").addEventListener("click", opensignupDialog);
   $("closeModal").addEventListener("click", closeUserFormDialog);
-  $("logoutNavButton").addEventListener("click", logout);
+  $("closeModal").addEventListener("click", closeUserFormDialog);
   isAuth(); 
-};
+  $("logoutNavButton").addEventListener("click", logout);
+});
 
 var flag;
 
@@ -34,6 +33,7 @@ function isAuth(){
                 $("signupNavButton").style.display = "none";
                 $("loginNavButton").style.display = "none";
                 $("logoutNavButton").style.display = "";
+                alert(data["username"]);
               }
               else{
                 $('pp').style.display = "none";
@@ -58,7 +58,7 @@ function openLoginDialog() {
   $("userFormDiv").style.display = "block";
   $("loginExtrasDiv").style.display = "";
   $("userFormButton").innerText = "Login";
-  $('userForm').action = "/login";
+  $("userForm").action = "/login";
 }
 
 function opensignupDialog() {
@@ -67,7 +67,7 @@ function opensignupDialog() {
   $("userFormDiv").style.display = "block";
   $("userFormButton").innerText = "Sign Up";
   $("loginExtrasDiv").style.display = "none";
-  $('userForm').action = "/register";
+  $("userForm").action = "/register";
 }
 
 function logout() {

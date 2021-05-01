@@ -9,9 +9,11 @@ const Application = mongoose.model("Application", schemas.applicationsSchema);
 const Game = mongoose.model("Game", schemas.gamesSchema);
 const Movie = mongoose.model("Movie", schemas.moviesSchema);
 const Book = mongoose.model("Book", schemas.booksSchema);
+passport.serializeUser(User.serializeUser()); //session encoding
+passport.deserializeUser(User.deserializeUser()); //session decoding
+passport.use(new LocalStrategy(User.authenticate()));
 
 module.exports = function (app) {
-  
   app.get("/addData", (req, res) => {
     // Add data to the DB from data.json
     addData();
@@ -19,59 +21,63 @@ module.exports = function (app) {
     res.send("Data Added");
   });
 
-  passport.serializeUser(User.serializeUser());       //session encoding
-  passport.deserializeUser(User.deserializeUser());   //session decoding
-  passport.use(new LocalStrategy(User.authenticate()));
-  app.use(bodyParser.urlencoded(
-        { extended:true }
-  ))
-  app.use(passport.initialize());
-  app.use(passport.session());
+  app.post(
+    "/login",
+    passport.authenticate("local", {
+      successRedirect: "/",
+      failureRedirect: "/",
+    }),
+    function (req, res) {}
+  );
 
-
-  app.post("/login",passport.authenticate("local",{
-    successRedirect:"/",
-    failureRedirect:"/",
-  }),function (req, res){
+  app.post("/register", (req, res) => {
+    User.register(
+      new User({
+        username: req.body.username,
+        profilePicture:
+          "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+      }),
+      req.body.password,
+      function (err, user) {
+        if (err) {
+          console.log(err);
+          res.render("../../frontend/views/home");
+        }
+        passport.authenticate("local")(req, res, function () {
+          res.redirect("/");
+        });
+      }
+    );
   });
 
-  app.post("/register",(req,res)=>{
-    
-    User.register(new User({username: req.body.username, profilePicture: "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}),req.body.password,function(err,user){
-    if(err){
-        console.log(err);
-        res.render("../../frontend/views/home");
-    }
-    passport.authenticate("local")(req,res,function(){
-        res.redirect("/");
-    })   
-    })
-  })
-
-  app.get("/logout",(req,res)=>{
+  app.get("/logout", (req, res) => {
     req.logout();
+    delete req.session.passport;
     res.redirect("/");
   });
 
-  function isLoggedIn(req,res,next) {
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.send({"isAuth":"false"});
-  }
 
-  app.get('/auth',isLoggedIn,function(req,res){
-    res.send({"isAuth":"true"})
+  app.get('/auth',function(req,res){
+    if(req.session.passport){
+      res.send({"isAuth":"true","username":req.session.passport.user})
+    }
+    else{
+      res.send({"isAuth":"false"});
+    }
+
   });
 
   app.get("/", (req, res) => {
-    res.render("../../frontend/views/home");
+    res.render("../../frontend/views/home", {});
   });
 
   app.get("/applications", (req, res) => {
     Application.find().then((applications) => {
-      res.render("../../frontend/views/applications", {
-        applications: applications,
+      User.findOne({ username: "Bleast" }).then((user) => {
+        res.render("../../frontend/views/applications", {
+          applications: applications,
+          wishlist: user.wishlist.map((item) => item.id),
+        });
       });
     });
   });
@@ -86,7 +92,12 @@ module.exports = function (app) {
 
   app.get("/games", (req, res) => {
     Game.find().then((games) => {
-      res.render("../../frontend/views/games", { games: games });
+      User.findOne({ username: "Bleast" }).then((user) => {
+        res.render("../../frontend/views/games", {
+          games: games,
+          wishlist: user.wishlist.map((item) => item.id),
+        });
+      });
     });
   });
 
@@ -100,7 +111,12 @@ module.exports = function (app) {
 
   app.get("/movies", (req, res) => {
     Movie.find().then((movies) => {
-      res.render("../../frontend/views/movies", { movies: movies });
+      User.findOne({ username: "Bleast" }).then((user) => {
+        res.render("../../frontend/views/movies", {
+          movies: movies,
+          wishlist: user.wishlist.map((item) => item.id),
+        });
+      });
     });
   });
 
@@ -114,7 +130,12 @@ module.exports = function (app) {
 
   app.get("/books", (req, res) => {
     Book.find().then((books) => {
-      res.render("../../frontend/views/books", { books: books });
+      User.findOne({ username: "Bleast" }).then((user) => {
+        res.render("../../frontend/views/books", {
+          books: books,
+          wishlist: user.wishlist.map((item) => item.id),
+        });
+      });
     });
   });
 
@@ -173,11 +194,30 @@ module.exports = function (app) {
   // Add item to wishlist
   app.post("/user/:username/wishlist", (req, res) => {
     let username = req.params.username;
-    let item = req.body.item;
+    let item = req.body;
     User.findOne({ username: username }).then((user) => {
-      user.wishlist.push(item);
-      user.save();
-      res.send("Added to wishlist");
+      let index = user.wishlist.findIndex((element) => element.id === item.id);
+      if (index === -1) {
+        user.wishlist.push(item);
+        user.save();
+        res.send("Added to wishlist");
+      }
+      res.send("Duplicate");
+    });
+  });
+
+  // Delete item from wishlist
+  app.delete("/user/:username/wishlist", (req, res) => {
+    let username = req.params.username;
+    let itemId = req.body.id;
+    User.findOne({ username: username }).then((user) => {
+      let index = user.wishlist.findIndex((element) => element.id === itemId);
+      if (index > -1) {
+        user.wishlist.splice(index, 1);
+        user.save();
+        res.send("Removed from wishlist");
+      }
+      res.send("Not Found");
     });
   });
 

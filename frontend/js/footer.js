@@ -1,4 +1,4 @@
-export function fetchCountry() {
+window.onload = () => {
   var ip;
   fetch("https://api.ipify.org?format=json")
     .then((response) => response.json())
@@ -15,4 +15,4 @@ export function fetchCountry() {
           document.getElementById("countryFlag").src = data.country_flag;
         });
     });
-}
+};
