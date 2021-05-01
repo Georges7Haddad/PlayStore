@@ -16,9 +16,11 @@
                     <div class="itemBox largeItemBox">
 
                         <img class="itemImage" src="<%=books[i].image%>" alt="Image">
-                        <p class="itemTitle">
-                            <%=books[i].title%>
-                        </p>
+                        <a href="/item?itemType=<%=books[i].constructor.modelName%>&itemId=<%=books[i]._id%>">
+                            <p class="itemTitle">
+                                <%=books[i].title%>
+                            </p>
+                        </a>
                         <p class="itemType">
                             <%=books[i].constructor.modelName%>
                         </p>

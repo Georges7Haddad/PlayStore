@@ -20,9 +20,11 @@
                                 <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
                                 <% } %>
                                     <img class="itemImage" src="<%=applications[i].image%>" alt="Image">
-                                    <p class="itemTitle">
-                                        <%=applications[i].title%>
-                                    </p>
+                                    <a href="/item?itemType=<%=applications[i].constructor.modelName%>&itemId=<%=applications[i]._id%>">
+                                        <p class="itemTitle">
+                                            <%=applications[i].title%>
+                                        </p>
+                                    </a>
                                     <p class="itemType">
                                         <%=applications[i].constructor.modelName%>
                                     </p>

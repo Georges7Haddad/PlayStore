@@ -24,9 +24,11 @@
                                         <% } %>
                             <% } %>
                         <img class="itemImage" src="<%=wishlist[i].image%>" alt="Image">
-                        <p class="itemTitle">
-                            <%=wishlist[i].title%>
-                        </p>
+                        <a href="/item?itemType=<%=wishlist[i].constructor.modelName%>&itemId=<%=wishlist[i]._id%>">
+                            <p class="itemTitle">
+                                <%=wishlist[i].title%>
+                            </p>
+                        </a>
                         <p class="itemType">
                             <%=wishlist[i].constructor.modelName%>
                         </p>

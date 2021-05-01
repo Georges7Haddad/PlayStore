@@ -5,9 +5,11 @@ function $(id) {
 window.addEventListener("load", () => {
   $("sidebarIconAnchor").addEventListener("click", openSideNav);
   $("sidebarCloseButton").addEventListener("click", closeSideNav);
-  $("loginNavButton").addEventListener("click", openLoginDialog);
-  $("signupNavButton").addEventListener("click", opensignupDialog);
-  $("closeModal").addEventListener("click", closeUserFormDialog);
+  if ($("loginNavButton")) {
+    $("loginNavButton").addEventListener("click", openLoginDialog);
+    $("signupNavButton").addEventListener("click", opensignupDialog);
+    $("closeModal").addEventListener("click", closeUserFormDialog);
+  }
 });
 
 function openSideNav() {
@@ -23,7 +25,7 @@ function openLoginDialog() {
   $("userFormDiv").style.display = "block";
   $("loginExtrasDiv").style.display = "";
   $("userFormButton").innerText = "Login";
-  $('userForm').action = "/login";
+  $("userForm").action = "/login";
 }
 
 function opensignupDialog() {
@@ -32,7 +34,7 @@ function opensignupDialog() {
   $("userFormDiv").style.display = "block";
   $("userFormButton").innerText = "Sign Up";
   $("loginExtrasDiv").style.display = "none";
-  $('userForm').action = "/register";
+  $("userForm").action = "/register";
 }
 
 window.onclick = function (event) {
