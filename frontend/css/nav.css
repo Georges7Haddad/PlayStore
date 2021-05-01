@@ -3,16 +3,14 @@
   height: 35px;
   margin: 20px;
 }
-
 #pp {
   width: 35px;
   height: 35px;
   margin: 20px;
 }
-
 nav {
   padding: 5px 30px;
-  background-color: teal;
+  background-color: #657e95;
   display: flex;
 }
 
@@ -20,8 +18,8 @@ button.navButtons {
   width: 75px;
   height: 35px;
   margin: 20px;
-  border: teal;
-  background-color: rgb(20, 66, 66);
+  border: #0d4b84;
+  background-color: #0d4b84;
   color: white;
   border-radius: 10px;
 }
@@ -41,7 +39,7 @@ button.navButtons {
   height: 30px;
   margin: 20px;
   margin-right: 15%;
-  border: teal;
+  border: #0d4b84;
   border-radius: 1px;
 }
 
@@ -60,7 +58,7 @@ button.navButtons {
 }
 
 .dropbtn {
-  background-color: rgb(20, 66, 66);
+  background-color: #0d4b84;
   color: white;
   padding: 16px;
   font-size: 16px;

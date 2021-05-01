@@ -7,7 +7,7 @@
   width: 33%;
   height: 580px;
   overflow: auto;
-  background-color: teal;
+  background-color: #657e95;
   padding-top: 100px;
   padding-left: 150px;
 }
@@ -36,7 +36,7 @@
   width: 150px;
   height: 35px;
   margin: 40px 90px;
-  border: teal;
+  border :#657e95;
   border-radius: 10px;
 }
 
