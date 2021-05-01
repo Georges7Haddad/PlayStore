@@ -5,12 +5,11 @@
     <meta charset="UTF-8" />
     <title>Play Store</title>
     <%- include('headImports')%>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">  
 </head>
 
 <body>
     <%- include('navbar')%>
-
-        <%= item %>
             <div id="userFormDiv">
                 <a href="#" id="closeModal">&times;</a>
                 <h1>Play Store</h1>
@@ -27,6 +26,28 @@
                     </div>
                     <button id="userFormButton"></button>
                 </form>
+            </div>
+
+
+            <div class="item_box">
+                <div class="photo_title">
+                    <img class="itemImage" src="<%=item[0].image%>" alt="Image">
+                    <div class="details">
+                        <h1><%=item[0].title%></h1>
+                        <p><i class="fas fa-star"></i> Average Rating: <%=item[0].averageRating%> / 10</p> 
+                        <p><i class="fas fa-user"></i> Number of Reviews: <%=item[0].reviews%> </p>
+                        <p><i class="fas fa-tag"></i> Price: 
+                            <% if (item[0].price===0) { %>
+                                Free
+                                <% } else { %>
+                                    $<%=item[0].price%>
+                                        <% } %>
+                        
+                        </p>
+                    </div>
+                </div>
+                <h4><%=item[0].description%></h4>
+
             </div>
 
             <div id="content">
