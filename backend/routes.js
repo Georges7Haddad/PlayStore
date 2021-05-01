@@ -28,9 +28,10 @@ module.exports = function (app) {
   app.use(passport.initialize());
   app.use(passport.session());
 
+
   app.post("/login",passport.authenticate("local",{
     successRedirect:"/",
-    failureRedirect:"/"
+    failureRedirect:"/",
   }),function (req, res){
   });
 
@@ -56,8 +57,12 @@ module.exports = function (app) {
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect("/login");
+    res.send({"isAuth":"false"});
   }
+
+  app.get('/auth',isLoggedIn,function(req,res){
+    res.send({"isAuth":"true"})
+  });
 
   app.get("/", (req, res) => {
     res.render("../../frontend/views/home");

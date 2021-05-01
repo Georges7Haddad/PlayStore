@@ -10,7 +10,40 @@ window.onload = () => {
   $("loginNavButton").addEventListener("click", openLoginDialog);
   $("signupNavButton").addEventListener("click", opensignupDialog);
   $("closeModal").addEventListener("click", closeUserFormDialog);
+  $("logoutNavButton").addEventListener("click", logout);
+  isAuth(); 
 };
+
+var flag;
+
+function isAuth(){
+  fetch('http://localhost:8080/auth',{
+    method : 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+    },
+    })
+    .then(function(response){ //This is the response from server
+        response.json().then(
+            function (data) { //data from response
+              flag = data['isAuth']
+              if(flag == "true")
+              {
+                $('pp').style.display = "";
+                $("signupNavButton").style.display = "none";
+                $("loginNavButton").style.display = "none";
+                $("logoutNavButton").style.display = "";
+              }
+              else{
+                $('pp').style.display = "none";
+                $("signupNavButton").style.display = "";
+                $("loginNavButton").style.display = "";
+                $("logoutNavButton").style.display = "none";
+              }
+      })
+    })
+}
 
 function openSideNav() {
   $("sidebar").style.width = "250px";
@@ -36,6 +69,19 @@ function opensignupDialog() {
   $("loginExtrasDiv").style.display = "none";
   $('userForm').action = "/register";
 }
+
+function logout() {
+  fetch('http://localhost:8080/logout',{
+    method : 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+    },
+    })
+  location.reload();
+}
+
+
 
 window.onclick = function (event) {
   var modal = $("userFormDiv");
