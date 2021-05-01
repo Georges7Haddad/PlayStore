@@ -40,14 +40,21 @@
                     </a>
                 </div>
             </div>
+            <% if (username) { %>
+                <div id="wishlistDiv" class="dropdown">
+                    <a href="/user/<%=username%>/wishlist">
+                        <button class="dropbtn">Wishlist</button>
+                    </a>
+                </div>
 
-            <div class="dropdown">
-                <a href="/user/Bleast/wishlist">
-                    <button class="dropbtn">Wishlist</button>
-                </a>
-            </div>
+                <div id="lastVisitedDiv" class="dropdown">
+                    <a href="/user/<%=username%>/last24VisitedItems">
+                        <button class="dropbtn">Last Visited</button>
+                    </a>
+                </div>
+                <% } %>
 
-            <%- include('footer')%>
+                    <%- include('footer')%>
         </div>
 </body>
 

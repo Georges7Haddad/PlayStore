@@ -1,35 +1,4 @@
 {
-    "users": [
-        {
-            "username": "Bleast",
-            "password": "admin",
-            "profilePicture": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.postplanner.com%2Fhs-fs%2Fhub%2F513577%2Ffile-2886416984-png%2Fblog-files%2Ffacebook-profile-pic-vs-cover-photo-sq.png%3Fwidth%3D250%26height%3D250%26name%3Dfacebook-profile-pic-vs-cover-photo-sq.png&imgrefurl=https%3A%2F%2Fwww.postplanner.com%2Ffacebook-profile-picture-more-important-than-cover-photo-for-pages%2F&tbnid=nyFMOkQaK3q9eM&vet=12ahUKEwiY07OwuJTwAhUQ2xoKHYTBDW8QMyggegUIARCZAg..i&docid=DFlrvMtp2WJ07M&w=250&h=250&q=profile%20picture&ved=2ahUKEwiY07OwuJTwAhUQ2xoKHYTBDW8QMyggegUIARCZAg",
-            "wishlist": [
-                {
-                    "itemType": "Movie",
-                    "id": "alijfo240jf209fu20"
-                }
-            ],
-            "last24VisitedItems": [
-                {
-                    "itemType": "Book",
-                    "id": "lkn982r0hf02hg0fh24"
-                }
-            ]
-        }
-    ],
-    "reviews": [
-        {
-            "user": "Bleast",
-            "rating": 7.6,
-            "text": "Excellent",
-            "itemId": "lfajnfjn240fing02ign01n",
-            "likes": [
-                "Bleast"
-            ],
-            "reports": 1
-        }
-    ],
     "movies": [
         {
             "title": "Jumanji: Welcome to the Jungle",

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Play Store</title>
+    <%- include('headImports')%>
+</head>
+
+<body>
+    <%- include('navbar')%>
+
+        <div id="content">
+            <div class="itemsRow">
+                <% for (var i=0;i<last24VisitedItems.length;i++) {%>
+                    <% if (["Book", "Movie" ].includes(last24VisitedItems[i].constructor.modelName)) { %>
+                        <div class="itemBox largeItemBox">
+                            <% } else { %>
+                                <div class="itemBox">
+                                    <% if (wishlist.includes(last24VisitedItems[i].id)) { %>
+                                        <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                        <% } else { %>
+                                            <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                            <% } %>
+                                                <% } %>
+                                                    <img class="itemImage" src="<%=last24VisitedItems[i].image%>"
+                                                        alt="Image">
+                                                    <a
+                                                        href="/item?itemType=<%=last24VisitedItems[i].constructor.modelName%>&itemId=<%=last24VisitedItems[i]._id%>">
+                                                        <p class="itemTitle">
+                                                            <%=last24VisitedItems[i].title%>
+                                                        </p>
+                                                    </a>
+                                                    <p class="itemType">
+                                                        <%=last24VisitedItems[i].constructor.modelName%>
+                                                    </p>
+                                                    <p class="itemId">
+                                                        <%=last24VisitedItems[i]._id%>
+                                                    </p>
+                                                    <% if (["Book", "Movie"
+                                                        ].includes(last24VisitedItems[i].constructor.modelName)) { %>
+                                                        <% if (wishlist.includes(last24VisitedItems[i].id)) { %>
+                                                            <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                                            <% } else { %>
+                                                                <a href="#"><i
+                                                                        class="fa fa-bookmark-o bookmark"></i></a>
+                                                                <% } %>
+                                                                    <%} %>
+
+                                                                        <p class="itemPrice">
+                                                                            <% if (last24VisitedItems[i].price===0) { %>
+                                                                                Free
+                                                                                <% } else { %>
+                                                                                    <%=last24VisitedItems[i].price%>$
+                                                                                        <% } %>
+                                                                        </p>
+                                </div>
+                                <%} %>
+                        </div>
+
+                        <%- include('footer')%>
+            </div>
+</body>
+
+</html>

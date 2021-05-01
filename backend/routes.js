@@ -21,21 +21,16 @@ module.exports = function (app) {
     res.send("Data Added");
   });
 
-  app.post(
-    "/login",
-    passport.authenticate("local", {
-      successRedirect: "/",
-      failureRedirect: "/",
-    }),
-    function (req, res) {}
-  );
+  app.post("/login", passport.authenticate("local"), function (req, res) {
+    res.redirect(req.headers.referer);
+  });
 
   app.post("/register", (req, res) => {
     User.register(
       new User({
         username: req.body.username,
         profilePicture:
-          "https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png",
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU",
       }),
       req.body.password,
       function (err, user) {
@@ -56,95 +51,68 @@ module.exports = function (app) {
     res.redirect("/");
   });
 
-
-  app.get('/auth',function(req,res){
-    if(req.session.passport){
-      res.send({"isAuth":"true","username":req.session.passport.user})
+  app.get("/auth", function (req, res) {
+    if (req.session.passport) {
+      User.findOne({ username: req.session.passport.user }).then((user) => {
+        res.send({ isAuth: "true", user: user });
+      });
+    } else {
+      res.send({ isAuth: "false" });
     }
-    else{
-      res.send({"isAuth":"false"});
-    }
-
   });
 
   app.get("/", (req, res) => {
-    res.render("../../frontend/views/home", {});
+    res.render("../../frontend/views/home", {
+      username: req.session.passport ? req.session.passport.user : "",
+    });
   });
 
   app.get("/applications", (req, res) => {
-    Application.find().then((applications) => {
-      User.findOne({ username: "Bleast" }).then((user) => {
-        res.render("../../frontend/views/applications", {
-          applications: applications,
-          wishlist: user.wishlist.map((item) => item.id),
-        });
-      });
-    });
+    getItemsPage(Application, "applications", req, res);
   });
 
   app.get("/applications/topSelling", (req, res) => {
-    getTopSelling(Application, "applications", res);
+    getTopSelling(Application, "applications", req, res);
   });
 
   app.get("/applications/newestReleases", (req, res) => {
-    getNewestReleases(Application, "applications", res);
+    getNewestReleases(Application, "applications", req, res);
   });
 
   app.get("/games", (req, res) => {
-    Game.find().then((games) => {
-      User.findOne({ username: "Bleast" }).then((user) => {
-        res.render("../../frontend/views/games", {
-          games: games,
-          wishlist: user.wishlist.map((item) => item.id),
-        });
-      });
-    });
+    getItemsPage(Game, "games", req, res);
   });
 
   app.get("/games/topSelling", (req, res) => {
-    getTopSelling(Game, "games", res);
+    getTopSelling(Game, "games", req, res);
   });
 
   app.get("/games/newestReleases", (req, res) => {
-    getNewestReleases(Game, "games", res);
+    getNewestReleases(Game, "games", req, res);
   });
 
   app.get("/movies", (req, res) => {
-    Movie.find().then((movies) => {
-      User.findOne({ username: "Bleast" }).then((user) => {
-        res.render("../../frontend/views/movies", {
-          movies: movies,
-          wishlist: user.wishlist.map((item) => item.id),
-        });
-      });
-    });
+    getItemsPage(Movie, "movies", req, res);
   });
 
   app.get("/movies/topSelling", (req, res) => {
-    getTopSelling(Movie, "movies", res);
+    getTopSelling(Movie, "movies", req, res);
   });
 
   app.get("/movies/newestReleases", (req, res) => {
-    getNewestReleases(Movie, "movies", res);
+    getNewestReleases(Movie, "movies", req, res);
   });
 
   app.get("/books", (req, res) => {
-    Book.find().then((books) => {
-      User.findOne({ username: "Bleast" }).then((user) => {
-        res.render("../../frontend/views/books", {
-          books: books,
-          wishlist: user.wishlist.map((item) => item.id),
-        });
-      });
-    });
+    getItemsPage(Book, "books", req, res);
   });
 
   app.get("/books/topSelling", (req, res) => {
-    getTopSelling(Book, "books", res);
+    getTopSelling(Book, "books", req, res);
   });
 
   app.get("/books/newestReleases", (req, res) => {
-    getNewestReleases(Book, "books", res);
+    getNewestReleases(Book, "books", req, res);
   });
 
   app.get("/item", (req, res) => {
@@ -153,27 +121,26 @@ module.exports = function (app) {
     eval(itemType)
       .find({ _id: ObjectID(itemId) })
       .then((item) => {
-        res.render(`../../frontend/views/item`, { item: item });
+        res.render(`../../frontend/views/item`, {
+          item: item,
+          username: req.session.passport ? req.session.passport.user : "",
+        });
       });
   });
 
   // Add item to last 24 visited
   app.post("/user/:username/last24VisitedItems", (req, res) => {
-    let username = req.params.username;
-    let item = req.body.item;
-    User.findOne({ username: username }).then((user) => {
-      user.last24VisitedItems.push(item);
-      user.save();
-      res.send("Added to last 24 visited");
-    });
+    addItemToUser(req, res, "last24VisitedItems");
   });
 
   // Get user's last 24 visited items
   app.get("/user/:username/last24VisitedItems", (req, res) => {
     let last24VisitedItems = [];
+    var wishlist;
     let username = req.params.username;
     User.findOne({ username: username })
       .then(async (user) => {
+        wishlist = user.wishlist.map((item) => item.id);
         for (let i = 0; i < user.last24VisitedItems.length; i++) {
           await eval(user.last24VisitedItems[i].itemType)
             .findOne({
@@ -185,25 +152,17 @@ module.exports = function (app) {
         }
       })
       .then(() => {
-        res.render("../../frontend/views/wishlist", {
-          wishlist: last24VisitedItems,
+        res.render("../../frontend/views/lastVisited", {
+          wishlist: wishlist,
+          last24VisitedItems: last24VisitedItems,
+          username: req.session.passport.user,
         });
       });
   });
 
   // Add item to wishlist
   app.post("/user/:username/wishlist", (req, res) => {
-    let username = req.params.username;
-    let item = req.body;
-    User.findOne({ username: username }).then((user) => {
-      let index = user.wishlist.findIndex((element) => element.id === item.id);
-      if (index === -1) {
-        user.wishlist.push(item);
-        user.save();
-        res.send("Added to wishlist");
-      }
-      res.send("Duplicate");
-    });
+    addItemToUser(req, res, "wishlist");
   });
 
   // Delete item from wishlist
@@ -216,8 +175,9 @@ module.exports = function (app) {
         user.wishlist.splice(index, 1);
         user.save();
         res.send("Removed from wishlist");
+      } else {
+        res.send("Not Found");
       }
-      res.send("Not Found");
     });
   });
 
@@ -240,12 +200,48 @@ module.exports = function (app) {
       .then(() => {
         res.render("../../frontend/views/wishlist", {
           wishlist: wishlist,
+          username: req.session.passport.user,
         });
       });
   });
 };
 
-function getNewestReleases(model, itemType, res) {
+function addItemToUser(req, res, listName) {
+  let username = req.params.username;
+  let item = req.body;
+  User.findOne({ username: username }).then((user) => {
+    let index = user[listName].findIndex((element) => element.id === item.id);
+    if (index === -1) {
+      user[listName].unshift(item);
+      user.save();
+      res.send(`Added to ${listName}`);
+    } else {
+      res.send("Duplicate");
+    }
+  });
+}
+
+function getItemsPage(model, itemType, req, res) {
+  model.find().then((items) => {
+    if (req.session.passport) {
+      User.findOne({ username: req.session.passport.user }).then((user) => {
+        res.render(`../../frontend/views/${itemType}`, {
+          [itemType]: items,
+          wishlist: user.wishlist.map((item) => item.id),
+          username: req.session.passport.user,
+        });
+      });
+    } else {
+      res.render(`../../frontend/views/${itemType}`, {
+        [itemType]: items,
+        wishlist: [],
+        username: "",
+      });
+    }
+  });
+}
+
+function getNewestReleases(model, itemType, req, res) {
   model
     .find()
     .sort("-dateOfRelease")
@@ -253,11 +249,12 @@ function getNewestReleases(model, itemType, res) {
     .then((items) => {
       res.render(`../../frontend/views/${itemType}`, {
         [itemType]: items,
+        username: req.session.passport ? req.session.passport.user : "",
       });
     });
 }
 
-function getTopSelling(model, itemType, res) {
+function getTopSelling(model, itemType, req, res) {
   model
     .find()
     .sort("-copiesSold")
@@ -265,6 +262,7 @@ function getTopSelling(model, itemType, res) {
     .then((items) => {
       res.render(`../../frontend/views/${itemType}`, {
         [itemType]: items,
+        username: req.session.passport ? req.session.passport.user : "",
       });
     });
 }
@@ -296,8 +294,6 @@ function addData() {
     books = data["books"];
     applications = data["applications"];
     games = data["games"];
-    addItems(users, User);
-    addItems(reviews, Review);
     addItems(books, Book);
     addItems(movies, Movie);
     addItems(games, Game);

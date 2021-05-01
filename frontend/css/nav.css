@@ -8,6 +8,7 @@
   width: 35px;
   height: 35px;
   margin: 20px;
+  border-radius: 10px;
 }
 
 nav {
@@ -24,6 +25,11 @@ button.navButtons {
   background-color: rgb(20, 66, 66);
   color: white;
   border-radius: 10px;
+}
+
+#logoutNavButton a {
+  color: white;
+  text-decoration: none;
 }
 
 #navTitle {

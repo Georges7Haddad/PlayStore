@@ -14,7 +14,6 @@
             <div class="itemsRow">
                 <% for (var i=0;i<movies.length;i++) {%>
                     <div class="itemBox largeItemBox">
-
                         <img class="itemImage" src="<%=movies[i].image%>" alt="Image">
                         <a href="/item?itemType=<%=movies[i].constructor.modelName%>&itemId=<%=movies[i]._id%>">
                             <p class="itemTitle">
@@ -27,11 +26,13 @@
                         <p class="itemId">
                             <%=movies[i]._id%>
                         </p>
-                        <% if (wishlist.includes(movies[i]._id)) { %>
-                            <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
-                            <% } else { %>
-                                <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
-                                <% } %>
+                        <% if (username) { %>
+                            <% if (wishlist.includes(movies[i]._id)) { %>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <% } else { %>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <% } %>
+                                        <% } %>
                                     <p class="itemPrice">
                                         <% if (movies[i].price===0) { %>
                                             Free

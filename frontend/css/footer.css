@@ -21,3 +21,7 @@ footer img {
   margin-left: 65%;
   width: 30px;
 }
+
+#userUsername {
+  display: none;
+}

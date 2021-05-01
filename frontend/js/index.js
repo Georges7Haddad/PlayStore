@@ -3,46 +3,40 @@ function $(id) {
 }
 
 window.addEventListener("load", () => {
+  isAuth();
   $("sidebarIconAnchor").addEventListener("click", openSideNav);
   $("sidebarCloseButton").addEventListener("click", closeSideNav);
   $("loginNavButton").addEventListener("click", openLoginDialog);
   $("signupNavButton").addEventListener("click", opensignupDialog);
   $("closeModal").addEventListener("click", closeUserFormDialog);
   $("closeModal").addEventListener("click", closeUserFormDialog);
-  isAuth(); 
-  $("logoutNavButton").addEventListener("click", logout);
 });
 
-var flag;
-
-function isAuth(){
-  fetch('http://localhost:8080/auth',{
-    method : 'GET',
+function isAuth() {
+  fetch("http://localhost:8080/auth", {
+    method: "GET",
     headers: {
-        'Accept': 'application/json',
-        'Content-type': 'application/json'
+      Accept: "application/json",
+      "Content-type": "application/json",
     },
-    })
-    .then(function(response){ //This is the response from server
-        response.json().then(
-            function (data) { //data from response
-              flag = data['isAuth']
-              if(flag == "true")
-              {
-                $('pp').style.display = "";
-                $("signupNavButton").style.display = "none";
-                $("loginNavButton").style.display = "none";
-                $("logoutNavButton").style.display = "";
-                alert(data["username"]);
-              }
-              else{
-                $('pp').style.display = "none";
-                $("signupNavButton").style.display = "";
-                $("loginNavButton").style.display = "";
-                $("logoutNavButton").style.display = "none";
-              }
-      })
-    })
+  }).then(function (response) {
+    response.json().then(function (data) {
+      authenticated = data.isAuth;
+      if (authenticated === "true") {
+        user = data.user;
+        $("pp").style.display = "";
+        $("pp").src = user.profilePicture;
+        $("signupNavButton").style.display = "none";
+        $("loginNavButton").style.display = "none";
+        $("logoutNavButton").style.display = "";
+      } else {
+        $("pp").style.display = "none";
+        $("signupNavButton").style.display = "";
+        $("loginNavButton").style.display = "";
+        $("logoutNavButton").style.display = "none";
+      }
+    });
+  });
 }
 
 function openSideNav() {
@@ -69,19 +63,6 @@ function opensignupDialog() {
   $("loginExtrasDiv").style.display = "none";
   $("userForm").action = "/register";
 }
-
-function logout() {
-  fetch('http://localhost:8080/logout',{
-    method : 'GET',
-    headers: {
-        'Accept': 'application/json',
-        'Content-type': 'application/json'
-    },
-    })
-  location.reload();
-}
-
-
 
 window.onclick = function (event) {
   var modal = $("userFormDiv");
