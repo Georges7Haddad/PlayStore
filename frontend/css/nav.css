@@ -14,7 +14,11 @@ nav {
   background-color: #657e95;
   display: flex;
 }
-
+.page_title {
+  padding: 10px;
+  text-align: center;
+  font-family: Montserrat;
+}
 button.navButtons {
   width: 75px;
   height: 35px;
