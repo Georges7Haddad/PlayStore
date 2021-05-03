@@ -8,31 +8,51 @@
   height: 580px;
   overflow: auto;
   background-color: #657e95;
-  padding-top: 100px;
+  padding-top: 65px;
   padding-left: 150px;
 }
+
 #userForm {
   margin: auto;
   height: 100px;
   width: 500px;
 }
+
+#forgotUserForm {
+  margin: auto;
+  height: 100px;
+  width: 500px;
+}
+
 #username,
-#password {
+#password,
+#email {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 330px;
   height: 30px;
 }
+
 #userFormDiv h1 {
   margin-left: 80px;
 }
+
 #userFormDiv img {
   width: 100px;
   height: 100px;
   margin-bottom: 30px;
   margin-left: 110px;
 }
+
 #userFormButton {
+  width: 150px;
+  height: 35px;
+  margin: 40px 90px;
+  border :#657e95;
+  border-radius: 10px;
+}
+
+#forgotUserFormButton {
   width: 150px;
   height: 35px;
   margin: 40px 90px;
@@ -43,6 +63,7 @@
 #userFormDiv a {
   margin-left: 50px;
 }
+
 #closeModal {
   position: absolute;
   right: 25px;

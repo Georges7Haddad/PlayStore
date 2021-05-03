@@ -10,6 +10,7 @@ window.addEventListener("load", () => {
   $("signupNavButton").addEventListener("click", opensignupDialog);
   $("closeModal").addEventListener("click", closeUserFormDialog);
   $("closeModal").addEventListener("click", closeUserFormDialog);
+  $("forgotPassword").addEventListener("click", openForgotPasswordDialog);
 });
 
 function isAuth() {
@@ -53,6 +54,9 @@ function openLoginDialog() {
   $("loginExtrasDiv").style.display = "";
   $("userFormButton").innerText = "Login";
   $("userForm").action = "/login";
+  $("RegisterExtrasDiv").style.display = "none";
+  $("registerLoginDiv").style.display = "";
+  $("forgotPasswordDiv").style.display = "none";
 }
 
 function opensignupDialog() {
@@ -62,6 +66,17 @@ function opensignupDialog() {
   $("userFormButton").innerText = "Sign Up";
   $("loginExtrasDiv").style.display = "none";
   $("userForm").action = "/register";
+  $("RegisterExtrasDiv").style.display = "";
+  $("registerLoginDiv").style.display = "";
+  $("forgotPasswordDiv").style.display = "none";
+}
+
+function openForgotPasswordDialog(){
+  $("content").style.opacity = "0.5";
+  document.getElementsByTagName("nav")[0].style.opacity = "0.5";
+  $("userFormDiv").style.display = "block";
+  $("registerLoginDiv").style.display = "none";
+  $("forgotPasswordDiv").style.display = "";
 }
 
 window.onclick = function (event) {
