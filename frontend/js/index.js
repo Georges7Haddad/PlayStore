@@ -71,7 +71,7 @@ function opensignupDialog() {
   $("forgotPasswordDiv").style.display = "none";
 }
 
-function openForgotPasswordDialog(){
+function openForgotPasswordDialog() {
   $("content").style.opacity = "0.5";
   document.getElementsByTagName("nav")[0].style.opacity = "0.5";
   $("userFormDiv").style.display = "block";

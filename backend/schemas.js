@@ -6,7 +6,7 @@ const userSchema = new Schema({
   username: String,
   profilePicture: String,
   email: String,
-  password : String,
+  password: String,
   wishlist: [{ itemType: String, id: String }],
   last24VisitedItems: [{ itemType: String, id: String }],
 });
@@ -14,7 +14,7 @@ const userSchema = new Schema({
 userSchema.plugin(passportLocalMongoose);
 
 const reviewSchema = new Schema({
-  user: String,       
+  user: String,
   rating: Number,
   itemId: String,
   date: { type: Date, default: Date.now },
