@@ -24,17 +24,39 @@
     <a href="#" id="closeModal">&times;</a>
     <h1>Play Store</h1>
     <img src="/media/logo_transparent_big.png" alt="logo">
-    <form id="userForm" method="POST">
-        <label for="username">Username</label><br>
-        <input id="username" placeholder="Username" type="text" name="username"><br>
-        <label for="password">Password</label><br>
-        <input id="password" placeholder="Password" type="password" name="password"><br>
-        <div id="loginExtrasDiv">
-            <input type="checkbox" checked id="remembermeCheck">
-            <label for="remembermeCheck">Remember Me</label>
-            <a href="#">Forgot Password?</a>
-        </div>
-        <button id="userFormButton"></button>
+    <div id="forgotPasswordDiv">
+        <strong><p>A new password willl be sent to this address</p></strong>
+        <form action="/forgot" method="POST" id="forgotUserForm">
+            <input type="text" id="email" name="email" placeholder="Email"><br>
+            <input type="submit" value="Send me an Email" id="forgotUserFormButton">
+        </form>
+    </div>
+    <div id="registerLoginDiv">
+        <form id="userForm" method="POST">
+            <label for="username">Username</label><br>
+            <input id="username" placeholder="Username" type="text" name="username"><br>
+            <label for="password">Password</label><br>
+            <input id="password" placeholder="Password" type="password" name="password"><br>
+            <div id="loginExtrasDiv">
+                <input type="checkbox" checked id="remembermeCheck">
+                <label for="remembermeCheck">Remember Me</label>
+                <a href="#" id="forgotPassword">Forgot Password?</a>
+            </div>
+            <div id="RegisterExtrasDiv">
+                <label for="email">Email</label><br>
+                <input id="email" placeholder="Email" type="text" name="email"><br>
+            </div>
+            <button id="userFormButton"></button>
+        </form>
+    </div>
+</div>
+<div id="userFormDiv">
+    <h1>Play Store</h1>
+    <img src="/media/logo_transparent_big.png" alt="logo">
+    <strong><p>We will send a new password to your email address</p></strong>
+    <form action="/forgot" method="POST" id="userForm">
+        <input type="text" id="email" name="email" placeholder="Email"><br>
+        <input type="submit" value="Send me an Email" id="userFormButton">
     </form>
 </div>
 
