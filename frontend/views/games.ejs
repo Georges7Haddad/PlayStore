@@ -11,41 +11,42 @@
     <%- include('navbar')%>
     <h1 class="page_title">GAMES</h1>
 
-        <div id="content">
-            <div class="itemsRow">
-                <% for (var i=0;i<games.length;i++) {%>
-                    <div class="itemBox">
-                        <% if (username) { %>
-                            <% if (wishlist.includes(games[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
-                                <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+    <div id="content">
+        <div class="itemsRowHome">
+            <% for (var i=0;i<8;i++) {%>
+                <div class="itemBox">
+                    <% if (username) { %>
+                        <% if (wishlist.includes(games[i]._id)) { %>
+                            <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                            <% } else { %>
+                                <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                <% } %>
                                     <% } %>
-                                        <% } %>
-                                            <img class="itemImage" src="<%=games[i].image%>" alt="Image">
-                                            <a
-                                                href="/item?itemType=<%=games[i].constructor.modelName%>&itemId=<%=games[i]._id%>">
-                                                <p class="itemTitle">
-                                                    <%=games[i].title%>
-                                                </p>
-                                            </a>
-                                            <p class="itemType">
-                                                <%=games[i].constructor.modelName%>
+                                        <img class="itemImageHome" src="<%=games[i].image%>" alt="Image">
+                                        <a
+                                            href="/item?itemType=<%=games[i].constructor.modelName%>&itemId=<%=games[i]._id%>">
+                                            <p class="itemTitleHome">
+                                                <%=games[i].title%>
                                             </p>
-                                            <p class="itemId">
-                                                <%=games[i]._id%>
-                                            </p>
-                                            <p class="itemPrice">
-                                                <% if (games[i].price===0) { %>
-                                                    Free
-                                                    <% } else { %>
-                                                        <%=games[i].price%>$
-                                                            <% } %>
-                                            </p>
-                    </div>
-                    <%}%>
-            </div>
+                                        </a>
+                                        <p class="itemType">
+                                            <%=games[i].constructor.modelName%>
+                                        </p>
+                                        <p class="itemId">
+                                            <%=games[i]._id%>
+                                        </p>
+                                        <p class="itemPrice">
+                                            <% if (games[i].price===0) { %>
+                                                Free
+                                                <% } else { %>
+                                                    <%=games[i].price%>$
+                                                        <% } %>
+                                        </p>
+                </div>
+                <%}%>
+        </div>
 
+    <button class="dropbtn seemore">See More...</button>
             <%- include('footer')%>
         </div>
 </body>

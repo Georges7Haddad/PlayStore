@@ -10,41 +10,42 @@
 <body>
     <%- include('navbar')%>
     <h1 class="page_title">APPLICATIONS</h1>
-        <div id="content">
-            <div class="itemsRow">
-                <% for (var i=0;i<applications.length;i++) {%>
-                    <div class="itemBox">
-                        <% if (username) { %>
-                            <% if (wishlist.includes(applications[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
-                                <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+    <div id="content">
+        <div class="itemsRowHome">
+            <% for (var i=0;i<10;i++) {%>
+                <div class="itemBox">
+                    <% if (username) { %>
+                        <% if (wishlist.includes(applications[i]._id)) { %>
+                            <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                            <% } else { %>
+                                <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                <% } %>
                                     <% } %>
-                                        <% } %>
-                                            <img class="itemImage" src="<%=applications[i].image%>" alt="Image">
-                                            <a
-                                                href="/item?itemType=<%=applications[i].constructor.modelName%>&itemId=<%=applications[i]._id%>">
-                                                <p class="itemTitle">
-                                                    <%=applications[i].title%>
-                                                </p>
-                                            </a>
-                                            <p class="itemType">
-                                                <%=applications[i].constructor.modelName%>
+                                        <img class="itemImageHome" src="<%=applications[i].image%>" alt="Image">
+                                        <a
+                                            href="/item?itemType=<%=applications[i].constructor.modelName%>&itemId=<%=applications[i]._id%>">
+                                            <p class="itemTitleHome">
+                                                <%=applications[i].title%>
                                             </p>
-                                            <p class="itemId">
-                                                <%=applications[i]._id%>
-                                            </p>
-                                            <p class="itemPrice">
-                                                <% if (applications[i].price===0) { %>
-                                                    Free
-                                                    <% } else { %>
-                                                        <%=applications[i].price%>$
-                                                            <% } %>
-                                            </p>
-                    </div>
-                    <%}%>
-            </div>
+                                        </a>
+                                        <p class="itemType">
+                                            <%=applications[i].constructor.modelName%>
+                                        </p>
+                                        <p class="itemId">
+                                            <%=applications[i]._id%>
+                                        </p>
+                                        <p class="itemPrice">
+                                            <% if (applications[i].price===0) { %>
+                                                Free
+                                                <% } else { %>
+                                                    <%=applications[i].price%>$
+                                                        <% } %>
+                                        </p>
+                </div>
+                <%}%>
+        </div>
 
+        <button class="dropbtn seemore">See More...</button>
             <%- include('footer')%>
         </div>
 </body>
