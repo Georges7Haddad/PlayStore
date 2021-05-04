@@ -4,7 +4,10 @@ window.addEventListener("load", () => {
   for (let i = 0; i < bookmarkIcons.length; i++) {
     bookmarkIcons[i].addEventListener("click", bookmark);
   }
-  let itemTitles = document.getElementsByClassName("itemTitle");
+  let itemTitles = Array.from(document.getElementsByClassName("itemTitle"));
+  itemTitles = itemTitles.concat(
+    Array.from(document.getElementsByClassName("itemTitleHome"))
+  );
   for (let i = 0; i < itemTitles.length; i++) {
     itemTitles[i].parentElement.addEventListener("click", addLastVisited);
   }

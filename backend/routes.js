@@ -144,13 +144,27 @@ module.exports = function (app) {
     });
 
     Promise.all([promise1, promise2, promise3, promise4]).then((values) => {
-      res.render("../../frontend/views/home", {
-        topSellingApplications: values[0],
-        topSellingMovies: values[1],
-        newestGames: values[2],
-        newestBooks: values[3],
-        username: req.session.passport ? req.session.passport.user : "",
-      });
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render("../../frontend/views/home", {
+            topSellingApplications: values[0],
+            topSellingMovies: values[1],
+            newestGames: values[2],
+            newestBooks: values[3],
+            username: req.session.passport ? req.session.passport.user : "",
+            wishlist: user.wishlist.map((item) => item.id),
+          });
+        });
+      } else {
+        res.render("../../frontend/views/home", {
+          topSellingApplications: values[0],
+          topSellingMovies: values[1],
+          newestGames: values[2],
+          newestBooks: values[3],
+          username: req.session.passport ? req.session.passport.user : "",
+          wishlist: [],
+        });
+      }
     });
   });
 
@@ -318,6 +332,7 @@ function addItemToUser(req, res, listName) {
   let item = req.body;
   User.findOne({ username: username }).then((user) => {
     let index = user[listName].findIndex((element) => element.id === item.id);
+    console.log(index);
     if (index === -1) {
       user[listName].unshift(item);
       user.save();
@@ -353,7 +368,7 @@ function getNewestReleases(model, itemType, req, res) {
     .find()
     .sort("-dateOfRelease")
     .then((items) => {
-      res.render(`../../frontend/views/${itemType}`, {
+      res.render(`../../frontend/views/${itemType}Top`, {
         [itemType]: items,
         username: req.session.passport ? req.session.passport.user : "",
       });
@@ -365,7 +380,7 @@ function getTopSelling(model, itemType, req, res) {
     .find()
     .sort("-copiesSold")
     .then((items) => {
-      res.render(`../../frontend/views/${itemType}`, {
+      res.render(`../../frontend/views/${itemType}Top`, {
         [itemType]: items,
         username: req.session.passport ? req.session.passport.user : "",
       });

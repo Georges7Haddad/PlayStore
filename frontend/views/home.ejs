@@ -12,9 +12,24 @@
         <h1 class="page_title">HOME</h1>
         <div id="content">
             <h3>Top Selling Applications</h3>
-            <div class="itemsRow">
+            <a href="/applications/topSelling"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
                 <% for (var i=0;i<topSellingApplications.length;i++) {%>
                     <div class="itemBox">
+
+                        <img class="itemImage" src="<%=topSellingApplications[i].image%>" alt="Image">
+                        <a
+                            href="/item?itemType=<%=topSellingApplications[i].constructor.modelName%>&itemId=<%=topSellingApplications[i]._id%>">
+                            <p class="itemTitle">
+                                <%=topSellingApplications[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=topSellingApplications[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=topSellingApplications[i]._id%>
+                        </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(topSellingApplications[i]._id)) { %>
                                 <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
@@ -22,20 +37,6 @@
                                     <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
-                                            <img class="itemImage" src="<%=topSellingApplications[i].image%>"
-                                                alt="Image">
-                                            <a
-                                                href="/item?itemType=<%=topSellingApplications[i].constructor.modelName%>&itemId=<%=topSellingApplications[i]._id%>">
-                                                <p class="itemTitle">
-                                                    <%=topSellingApplications[i].title%>
-                                                </p>
-                                            </a>
-                                            <p class="itemType">
-                                                <%=topSellingApplications[i].constructor.modelName%>
-                                            </p>
-                                            <p class="itemId">
-                                                <%=topSellingApplications[i]._id%>
-                                            </p>
                                             <p class="itemPrice">
                                                 <% if (topSellingApplications[i].price===0) { %>
                                                     Free
@@ -47,9 +48,10 @@
                     <%}%>
             </div>
             <h3>Top Selling Movies</h3>
-            <div class="itemsRow">
+            <a href="/movies/topSelling"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
                 <% for (var i=0;i<topSellingMovies.length;i++) {%>
-                    <div class="itemBox largeItemBox">
+                    <div class="itemBox largeItemBoxHome">
                         <img class="itemImage" src="<%=topSellingMovies[i].image%>" alt="Image">
                         <a
                             href="/item?itemType=<%=topSellingMovies[i].constructor.modelName%>&itemId=<%=topSellingMovies[i]._id%>">
@@ -81,9 +83,24 @@
                     <%}%>
             </div>
             <h3>New Release Games</h3>
-            <div class="itemsRow">
+            <a href="/games/newestReleases"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
                 <% for (var i=0;i<newestGames.length;i++) {%>
                     <div class="itemBox">
+
+                        <img class="itemImage" src="<%=newestGames[i].image%>" alt="Image">
+                        <a
+                            href="/item?itemType=<%=newestGames[i].constructor.modelName%>&itemId=<%=newestGames[i]._id%>">
+                            <p class="itemTitle">
+                                <%=newestGames[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=newestGames[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=newestGames[i]._id%>
+                        </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(newestGames[i]._id)) { %>
                                 <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
@@ -91,19 +108,6 @@
                                     <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
-                                            <img class="itemImage" src="<%=newestGames[i].image%>" alt="Image">
-                                            <a
-                                                href="/item?itemType=<%=newestGames[i].constructor.modelName%>&itemId=<%=newestGames[i]._id%>">
-                                                <p class="itemTitle">
-                                                    <%=newestGames[i].title%>
-                                                </p>
-                                            </a>
-                                            <p class="itemType">
-                                                <%=newestGames[i].constructor.modelName%>
-                                            </p>
-                                            <p class="itemId">
-                                                <%=newestGames[i]._id%>
-                                            </p>
                                             <p class="itemPrice">
                                                 <% if (newestGames[i].price===0) { %>
                                                     Free
@@ -115,9 +119,10 @@
                     <%}%>
             </div>
             <h3>New Release Books</h3>
-            <div class="itemsRow">
+            <a href="/books/newestReleases"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
                 <% for (var i=0;i<newestBooks.length;i++) {%>
-                    <div class="itemBox largeItemBox">
+                    <div class="itemBox largeItemBoxHome">
                         <img class="itemImage" src="<%=newestBooks[i].image%>" alt="Image">
                         <a
                             href="/item?itemType=<%=newestBooks[i].constructor.modelName%>&itemId=<%=newestBooks[i]._id%>">
@@ -150,6 +155,7 @@
             </div>
             <%- include('footer')%>
         </div>
+
 
 </body>
 

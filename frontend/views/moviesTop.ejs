@@ -12,7 +12,7 @@
         <h1 class="page_title">MOVIES</h1>
 
         <div id="content">
-            <div class="itemsRowHome">
+            <div class="itemsRow">
                 <% for (var i=0;i<10;i++) {%>
                     <div class="itemBox largeItemBoxHome">
                         <img class="itemImage" src="<%=movies[i].image%>" alt="Image">
@@ -44,8 +44,6 @@
                     </div>
                     <%}%>
             </div>
-
-            <button class="dropbtn seemore">See More...</button>
             <%- include('footer')%>
         </div>
 </body>
