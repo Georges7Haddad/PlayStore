@@ -1,11 +1,12 @@
 <nav>
-    <a href="#" id="sidebarIconAnchor"><img id="sidebarIcon" src="/media/sidebarIcon.png" alt="sidebarIcon"></a>
-    <img id="logo" src="/media/logo_transparent_big.png" alt="logo"></img>
+    <a href="#" id="sidebarIconAnchor"><img id="sidebarIcon" src="/../media/sidebarIcon.png" alt="sidebarIcon"></a>
+    <img id="logo" src="/../media/logo_transparent_big.png" alt="logo"></img>
     <a id="navTitleLink" href="/">
         <h1 id="navTitle">Play Store</h1>
     </a>
-    <input id="navSearch" placeholder="Search..." type="text">
+
     <img id="pp" alt="profile pic">
+    <input id="navSearch" placeholder="Search..." pattern=".{3,}" title="At least 3 characters" type="text">
     <button class="navButtons" id="logoutNavButton"><a href="/logout">Logout</a></button>
     <button class="navButtons" id="signupNavButton">Sign Up</button>
     <button class="navButtons" id="loginNavButton">Login</button>
@@ -23,9 +24,11 @@
 <div id="userFormDiv">
     <a href="#" id="closeModal">&times;</a>
     <h1>Play Store</h1>
-    <img src="/media/logo_transparent_big.png" alt="logo">
+    <img src="/../media/logo_transparent_big.png" alt="logo">
     <div id="forgotPasswordDiv">
-        <strong><p>A new password willl be sent to this address</p></strong>
+        <strong>
+            <p>A new password willl be sent to this address</p>
+        </strong>
         <form action="/forgot" method="POST" id="forgotUserForm">
             <input type="text" id="email" name="email" placeholder="Email"><br>
             <input type="submit" value="Send me an Email" id="forgotUserFormButton">
@@ -54,8 +57,10 @@
 </div>
 <div id="userFormDiv">
     <h1>Play Store</h1>
-    <img src="/media/logo_transparent_big.png" alt="logo">
-    <strong><p>We will send a new password to your email address</p></strong>
+    <img src="/../media/logo_transparent_big.png" alt="logo">
+    <strong>
+        <p>We will send a new password to your email address</p>
+    </strong>
     <form action="/forgot" method="POST" id="userForm">
         <input type="text" id="email" name="email" placeholder="Email"><br>
         <input type="submit" value="Send me an Email" id="userFormButton">
@@ -66,11 +71,11 @@
     <div class="dropdown">
         <button class="dropbtn">Choose Currency</button>
         <div class="dropdown-content">
-            <a href="#">
-                <img src="media/currency/united-states.png" width="15" height="15"> USD
+            <a id="USD" href="#">
+                <img src="/../media/currency/united-states.png" width="15" height="15"> USD
             </a>
-            <a href="#">
-                <img src="media/currency/lebanon.png" width="15" height="15"> LBP
+            <a id="LBP" href="#">
+                <img src="/../media/currency/lebanon.png" width="15" height="15"> LBP
             </a>
         </div>
     </div>
@@ -79,16 +84,16 @@
         <button class="dropbtn">Filter By</button>
         <div class="dropdown-content">
             <a href="#">
-                <img src="media/filter/genre.png" width="15" height="15"> Genre
+                <img src="/../media/filter/genre.png" width="15" height="15"> Genre
             </a>
             <a href="#">
-                <img src="media/filter/topselling.png" width="15" height="15"> Top Selling
+                <img src="/../media/filter/topselling.png" width="15" height="15"> Top Selling
             </a>
             <a href="#">
-                <img src="media/filter/newreleases.png" width="15" height="15"> New Releases
+                <img src="/../media/filter/newreleases.png" width="15" height="15"> New Releases
             </a>
             <a href="#">
-                <img src="media/filter/gooddeals.png" width="15" height="15"> Good Deals
+                <img src="/../media/filter/gooddeals.png" width="15" height="15"> Good Deals
             </a>
         </div>
     </div>

@@ -4,26 +4,47 @@
   flex-wrap: wrap;
   gap: 15px;
 }
+.itemsRowHome {
+  padding: 15px;
+  display: flex;
+  overflow: scroll;
+  gap: 15px;
+}
+.seemore {
+  float: right;
+}
 .itemBox {
   width: 180px;
-  height: 235px;
+  height: 255px;
   background-color: white;
   padding: 10px;
   border-radius: 5%;
+  text-align: center;
 }
 
 .itemBox .itemPrice {
   text-align: right;
 }
 
-.itemBox .itemImage {
-  margin-left: 25px;
-}
-
 .itemBox .itemTitle {
-  text-align: center;
+  color: black;
+}
+.itemBox a {
+  text-decoration: none;
+}
+.itemBox a:hover {
+  text-decoration: underline;
 }
 
+.itemImage {
+  width: 150px;
+  height: 150px;
+}
+
+.itemBox .itemTitleHome {
+  text-align: center;
+  margin: 3px;
+}
 .itemBox .itemType {
   font-size: small;
   text-align: center;
@@ -35,29 +56,27 @@
 
 .itemBox .fa {
   color: black;
-  float: right;
+  float: left;
   font-size: 24px;
 }
 
-.largeItemBox {
+.largeItemBoxHome {
   padding: 0;
-  width: 150px;
-  height: 330px;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.largeItemBox .itemImage {
-  margin-left: 0px;
-  height: 213px;
-  width: 160px;
+  width: 190px;
+  height: 360px;
+  white-space: wrap;
 }
 
 .itemBox .itemPrice {
   margin-right: 10px;
 }
 
-.largeItemBox .fa {
+.largeItemBoxHome .fa {
   margin-left: 10px;
   float: left;
+}
+
+.largeItemBoxHome .itemImage {
+  height: 235px;
+  width: 160px;
 }

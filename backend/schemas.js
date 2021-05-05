@@ -6,7 +6,7 @@ const userSchema = new Schema({
   username: String,
   profilePicture: String,
   email: String,
-  password : String,
+  password: String,
   wishlist: [{ itemType: String, id: String }],
   last24VisitedItems: [{ itemType: String, id: String }],
 });
@@ -14,7 +14,7 @@ const userSchema = new Schema({
 userSchema.plugin(passportLocalMongoose);
 
 const reviewSchema = new Schema({
-  user: String,       
+  user: String,
   rating: Number,
   itemId: String,
   date: { type: Date, default: Date.now },
@@ -38,7 +38,6 @@ const moviesSchema = new Schema({
     Director: String,
   },
   description: String,
-  reviews: [reviewSchema],
 });
 
 const booksSchema = new Schema({
@@ -51,7 +50,6 @@ const booksSchema = new Schema({
   image: String,
   averageRating: Number,
   description: String,
-  reviews: [reviewSchema],
 });
 
 const gamesSchema = new Schema({
@@ -64,7 +62,6 @@ const gamesSchema = new Schema({
   image: String,
   averageRating: Number,
   description: String,
-  reviews: [reviewSchema],
 });
 
 const applicationsSchema = new Schema({
@@ -77,7 +74,6 @@ const applicationsSchema = new Schema({
   image: String,
   averageRating: Number,
   description: String,
-  reviews: [reviewSchema],
 });
 
 module.exports = {

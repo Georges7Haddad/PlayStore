@@ -3,7 +3,6 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const schemas = require("./schemas"); // Connect Schemas
 
-
 const User = mongoose.model("User", schemas.userSchema);
 const Review = mongoose.model("Review", schemas.reviewSchema);
 const Application = mongoose.model("Application", schemas.applicationsSchema);
@@ -13,7 +12,7 @@ const Book = mongoose.model("Book", schemas.booksSchema);
 passport.serializeUser(User.serializeUser()); //session encoding
 passport.deserializeUser(User.deserializeUser()); //session decoding
 passport.use(new LocalStrategy(User.authenticate()));
-var nodemailer = require('nodemailer');
+var nodemailer = require("nodemailer");
 const { render } = require("ejs");
 const multer = require('multer');
 
@@ -28,7 +27,6 @@ const storage = multer.diskStorage({
 const upload = multer({storage:storage});
 
 module.exports = function (app) {
-
   app.get("/addData", (req, res) => {
     // Add data to the DB from data.json
     addData();
@@ -46,7 +44,8 @@ module.exports = function (app) {
       new User({
         username: req.body.username,
         email : req.body.email,
-        profilePicture: req.file['filename']
+        profilePicture: req.file['filename'],
+        email: req.body.email,
       }),
       req.body.password,
       function (err, user) {
@@ -117,12 +116,6 @@ module.exports = function (app) {
     }
   });
 
-  app.get("/", (req, res) => {
-    res.render("../../frontend/views/home", {
-      username: req.session.passport ? req.session.passport.user : "",
-    });
-  });
-
   app.get("/forgot", (req, res) => {
     res.render("../../frontend/views/forgot", {
       username: req.session.passport ? req.session.passport.user : "",
@@ -130,62 +123,101 @@ module.exports = function (app) {
   });
 
   app.post("/forgot", (req, res) => {
-    var pass = '';
-    var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + 
-            'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
-      
+    var pass = "";
+    var str =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+      "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
+
     for (i = 1; i <= 8; i++) {
-        var char = Math.floor(Math.random()
-                    * str.length + 1);
-          
-        pass += str.charAt(char)
+      var char = Math.floor(Math.random() * str.length + 1);
+
+      pass += str.charAt(char);
     }
     var cur;
-    User.findOne({ email: req.body.email })
-      .then(async (user) => {
-        cur = user;
-        if(cur){
-          User.findByUsername(cur.username).then(function(sanitizedUser){
-            if (sanitizedUser){
-                sanitizedUser.setPassword(pass, function(){
-                    sanitizedUser.save();
-                    res.send('New password sent to '+ req.body.email);
-                });
+    User.findOne({ email: req.body.email }).then(async (user) => {
+      cur = user;
+      if (cur) {
+        User.findByUsername(cur.username).then(
+          function (sanitizedUser) {
+            if (sanitizedUser) {
+              sanitizedUser.setPassword(pass, function () {
+                sanitizedUser.save();
+                res.send("New password sent to " + req.body.email);
+              });
             } else {
-                res.send('This email address does not exist');
+              res.send("This email address does not exist");
             }
-          },function(err){
-              console.error(err);
-          })
-        }
-        else{
-          res.send("This email address does not exist")
-        }
-      })
-
-    var transporter = nodemailer.createTransport({
-      service: 'hotmail',
-      auth: {
-        user: 'glk.playstore@hotmail.com',
-        pass: 'GLKpassword278'
+          },
+          function (err) {
+            console.error(err);
+          }
+        );
+      } else {
+        res.send("This email address does not exist");
       }
     });
-    
+
+    var transporter = nodemailer.createTransport({
+      service: "hotmail",
+      auth: {
+        user: "glk.playstore@hotmail.com",
+        pass: "GLKpassword278",
+      },
+    });
+
     var mailOptions = {
-      from: 'glk.playstore@hotmail.com',
+      from: "glk.playstore@hotmail.com",
       to: req.body.email,
-      subject: 'New Password for GLK Playstore',
-      text: "Your new password is: " + pass
+      subject: "New Password for GLK Playstore",
+      text: "Your new password is: " + pass,
     };
-    
-    transporter.sendMail(mailOptions, function(error, info){
+
+    transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log("Error while sending the email :" + error);
       } else {
-        console.log('Email sent to: '+req.body.email);
+        console.log("Email sent to: " + req.body.email);
       }
     });
-  
+  });
+
+  app.get("/", (req, res) => {
+    const promise1 = new Promise((resolve, reject) => {
+      get10TopSelling(Application, resolve);
+    });
+    const promise2 = new Promise((resolve, reject) => {
+      get10TopSelling(Movie, resolve);
+    });
+    const promise3 = new Promise((resolve, reject) => {
+      get10Newest(Game, resolve);
+    });
+    const promise4 = new Promise((resolve, reject) => {
+      get10Newest(Book, resolve);
+    });
+
+    Promise.all([promise1, promise2, promise3, promise4]).then((values) => {
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render("../../frontend/views/home", {
+            topSellingApplications: values[0],
+            topSellingMovies: values[1],
+            newestGames: values[2],
+            newestBooks: values[3],
+            username: req.session.passport ? req.session.passport.user : "",
+            wishlist: user.wishlist.map((item) => item.id),
+          });
+        });
+      } else {
+        res.render("../../frontend/views/home", {
+          topSellingApplications: values[0],
+          topSellingMovies: values[1],
+          newestGames: values[2],
+          newestBooks: values[3],
+          username: req.session.passport ? req.session.passport.user : "",
+          wishlist: [],
+        });
+      }
+    });
   });
 
   app.get("/applications", (req, res) => {
@@ -236,17 +268,107 @@ module.exports = function (app) {
     getNewestReleases(Book, "books", req, res);
   });
 
+  app.get("/search", (req, res) => {
+    let query = req.query.q;
+    const promise1 = new Promise((resolve, reject) => {
+      Book.find({
+        $or: [
+          {
+            title: { $regex: query, $options: "i" },
+          },
+          {
+            description: { $regex: query, $options: "i" },
+          },
+        ],
+      }).then((items) => {
+        resolve(items);
+      });
+    });
+    const promise2 = new Promise((resolve, reject) => {
+      Application.find({
+        $or: [
+          {
+            title: { $regex: query, $options: "i" },
+          },
+          {
+            description: { $regex: query, $options: "i" },
+          },
+        ],
+      }).then((items) => {
+        resolve(items);
+      });
+    });
+    const promise3 = new Promise((resolve, reject) => {
+      Game.find({
+        $or: [
+          {
+            title: { $regex: query, $options: "i" },
+          },
+          {
+            description: { $regex: query, $options: "i" },
+          },
+        ],
+      }).then((items) => {
+        resolve(items);
+      });
+    });
+    const promise4 = new Promise((resolve, reject) => {
+      Movie.find({
+        $or: [
+          {
+            title: { $regex: query, $options: "i" },
+          },
+          {
+            description: { $regex: query, $options: "i" },
+          },
+        ],
+      }).then((items) => {
+        resolve(items);
+      });
+    });
+
+    Promise.all([promise1, promise2, promise3, promise4]).then((values) => {
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render(`../../frontend/views/search`, {
+            items: values,
+            wishlist: user.wishlist.map((item) => item.id),
+            username: req.session.passport.user,
+          });
+        });
+      } else {
+        res.render(`../../frontend/views/search`, {
+          items: values,
+          wishlist: [],
+          username: "",
+        });
+      }
+    });
+  });
+
   app.get("/item", (req, res) => {
     let itemType = req.query.itemType;
     let itemId = req.query.itemId;
-    eval(itemType)
-      .find({ _id: ObjectID(itemId) })
-      .then((item) => {
-        res.render(`../../frontend/views/item`, {
-          item: item,
-          username: req.session.passport ? req.session.passport.user : "",
+    const promise1 = new Promise((resolve, reject) => {
+      eval(itemType)
+        .find({ _id: ObjectID(itemId) })
+        .then((item) => {
+          resolve(item);
         });
+    });
+    const promise2 = new Promise((resolve, reject) => {
+      Review.find({ itemId: itemId }).then((reviews) => {
+        resolve(reviews);
       });
+    });
+
+    Promise.all([promise1, promise2]).then((values) => {
+      res.render(`../../frontend/views/item`, {
+        item: values[0],
+        reviews: values[1],
+        username: req.session.passport ? req.session.passport.user : "",
+      });
+    });
   });
 
   // Add item to last 24 visited
@@ -327,6 +449,26 @@ module.exports = function (app) {
   });
 };
 
+function get10TopSelling(model, resolve) {
+  model
+    .find()
+    .sort("-dateOfRelease")
+    .limit(10)
+    .then((items) => {
+      resolve(items);
+    });
+}
+
+function get10Newest(model, resolve) {
+  model
+    .find()
+    .sort("-copiesSold")
+    .limit(10)
+    .then((items) => {
+      resolve(items);
+    });
+}
+
 function addItemToUser(req, res, listName) {
   let username = req.params.username;
   let item = req.body;
@@ -343,22 +485,33 @@ function addItemToUser(req, res, listName) {
 }
 
 function getItemsPage(model, itemType, req, res) {
-  model.find().then((items) => {
-    if (req.session.passport) {
-      User.findOne({ username: req.session.passport.user }).then((user) => {
-        res.render(`../../frontend/views/${itemType}`, {
-          [itemType]: items,
-          wishlist: user.wishlist.map((item) => item.id),
-          username: req.session.passport.user,
+  const promise1 = new Promise((resolve, reject) => {
+    get10TopSelling(model, resolve);
+  });
+  const promise2 = new Promise((resolve, reject) => {
+    get10Newest(model, resolve);
+  });
+
+  Promise.all([promise1, promise2]).then((values) => {
+    model.find().then((items) => {
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render(`../../frontend/views/${itemType}`, {
+            [`${itemType}TopSelling`]: values[0],
+            [`${itemType}Newest`]: values[1],
+            wishlist: user.wishlist.map((item) => item.id),
+            username: req.session.passport.user,
+          });
         });
-      });
-    } else {
-      res.render(`../../frontend/views/${itemType}`, {
-        [itemType]: items,
-        wishlist: [],
-        username: "",
-      });
-    }
+      } else {
+        res.render(`../../frontend/views/${itemType}`, {
+          [`${itemType}TopSelling`]: values[0],
+          [`${itemType}Newest`]: values[1],
+          wishlist: [],
+          username: "",
+        });
+      }
+    });
   });
 }
 
@@ -366,12 +519,22 @@ function getNewestReleases(model, itemType, req, res) {
   model
     .find()
     .sort("-dateOfRelease")
-    .limit(10)
     .then((items) => {
-      res.render(`../../frontend/views/${itemType}`, {
-        [itemType]: items,
-        username: req.session.passport ? req.session.passport.user : "",
-      });
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render(`../../frontend/views/${itemType}Top`, {
+            [itemType]: items,
+            wishlist: user.wishlist.map((item) => item.id),
+            username: req.session.passport.user,
+          });
+        });
+      } else {
+        res.render(`../../frontend/views/${itemType}Top`, {
+          [itemType]: items,
+          wishlist: [],
+          username: "",
+        });
+      }
     });
 }
 
@@ -379,12 +542,22 @@ function getTopSelling(model, itemType, req, res) {
   model
     .find()
     .sort("-copiesSold")
-    .limit(10)
     .then((items) => {
-      res.render(`../../frontend/views/${itemType}`, {
-        [itemType]: items,
-        username: req.session.passport ? req.session.passport.user : "",
-      });
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render(`../../frontend/views/${itemType}Top`, {
+            [itemType]: items,
+            wishlist: user.wishlist.map((item) => item.id),
+            username: req.session.passport.user,
+          });
+        });
+      } else {
+        res.render(`../../frontend/views/${itemType}Top`, {
+          [itemType]: items,
+          wishlist: [],
+          username: "",
+        });
+      }
     });
 }
 
@@ -421,8 +594,3 @@ function addData() {
     addItems(applications, Application);
   });
 }
-
-
-
-
-

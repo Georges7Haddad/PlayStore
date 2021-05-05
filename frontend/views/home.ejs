@@ -9,8 +9,160 @@
 
 <body>
     <%- include('navbar')%>
-    <h1 class="page_title">HOME</h1>
-    <%- include('footer')%>
+        <h1 class="page_title">HOME</h1>
+        <div id="content">
+            <h3>Top Selling Applications</h3>
+            <a href="/applications/topSelling"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
+                <% for (var i=0; i < topSellingApplications.length;i++) {%>
+                    <div class="itemBox">
+
+                        <img class="itemImage" src="<%=topSellingApplications[i].image%>" alt="Image">
+                        <a
+                            href="/item?itemType=<%=topSellingApplications[i].constructor.modelName%>&itemId=<%=topSellingApplications[i]._id%>">
+                            <p class="itemTitle">
+                                <%=topSellingApplications[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=topSellingApplications[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=topSellingApplications[i]._id%>
+                        </p>
+                        <% if (username) { %>
+                            <% if (wishlist.includes(topSellingApplications[i]._id)) { %>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <% } else { %>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <% } %>
+                                        <% } %>
+                                            <p class="itemPrice">
+                                                <% if (topSellingApplications[i].price===0) { %>
+                                                    Free
+                                                    <% } else { %>
+                                                        <%=topSellingApplications[i].price%>$
+                                                            <% } %>
+                                            </p>
+                    </div>
+                    <%}%>
+            </div>
+            <h3>Top Selling Movies</h3>
+            <a href="/movies/topSelling"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
+                <% for (var i=0;i<topSellingMovies.length;i++) {%>
+                    <div class="itemBox largeItemBoxHome">
+                        <div class="movieImageDiv">
+                            <div class="overlay">
+                                <a href="<%=topSellingMovies[i].trailerLink%>" class="playIcon" title="Play">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </a>
+                            </div>
+                            <img class="itemImage" src="<%=topSellingMovies[i].image%>" alt="Image">
+                        </div>
+                        <a
+                            href="/item?itemType=<%=topSellingMovies[i].constructor.modelName%>&itemId=<%=topSellingMovies[i]._id%>">
+                            <p class="itemTitle">
+                                <%=topSellingMovies[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=topSellingMovies[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=topSellingMovies[i]._id%>
+                        </p>
+                        <% if (username) { %>
+                            <% if (wishlist.includes(topSellingMovies[i]._id)) { %>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <% } else { %>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <% } %>
+                                        <% } %>
+                                            <p class="itemPrice">
+                                                <% if (topSellingMovies[i].price===0) { %>
+                                                    Free
+                                                    <% } else { %>
+                                                        <%=topSellingMovies[i].price%>$
+                                                            <% } %>
+                                            </p>
+                    </div>
+                    <%}%>
+            </div>
+            <h3>New Release Games</h3>
+            <a href="/games/newestReleases"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
+                <% for (var i=0;i<newestGames.length;i++) {%>
+                    <div class="itemBox">
+
+                        <img class="itemImage" src="<%=newestGames[i].image%>" alt="Image">
+                        <a
+                            href="/item?itemType=<%=newestGames[i].constructor.modelName%>&itemId=<%=newestGames[i]._id%>">
+                            <p class="itemTitle">
+                                <%=newestGames[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=newestGames[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=newestGames[i]._id%>
+                        </p>
+                        <% if (username) { %>
+                            <% if (wishlist.includes(newestGames[i]._id)) { %>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <% } else { %>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <% } %>
+                                        <% } %>
+                                            <p class="itemPrice">
+                                                <% if (newestGames[i].price===0) { %>
+                                                    Free
+                                                    <% } else { %>
+                                                        <%=newestGames[i].price%>$
+                                                            <% } %>
+                                            </p>
+                    </div>
+                    <%}%>
+            </div>
+            <h3>New Release Books</h3>
+            <a href="/books/newestReleases"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
+                <% for (var i=0;i<newestBooks.length;i++) {%>
+                    <div class="itemBox largeItemBoxHome">
+                        <img class="itemImage" src="<%=newestBooks[i].image%>" alt="Image">
+                        <a
+                            href="/item?itemType=<%=newestBooks[i].constructor.modelName%>&itemId=<%=newestBooks[i]._id%>">
+                            <p class="itemTitle">
+                                <%=newestBooks[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=newestBooks[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=newestBooks[i]._id%>
+                        </p>
+                        <% if (username) { %>
+                            <% if (wishlist.includes(newestBooks[i]._id)) { %>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <% } else { %>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <% } %>
+                                        <% } %>
+                                            <p class="itemPrice">
+                                                <% if (newestBooks[i].price===0) { %>
+                                                    Free
+                                                    <% } else { %>
+                                                        <%=newestBooks[i].price%>$
+                                                            <% } %>
+                                            </p>
+                    </div>
+                    <%}%>
+            </div>
+            <%- include('footer')%>
+        </div>
+
 
 </body>
 

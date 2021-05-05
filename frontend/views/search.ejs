@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Play Store</title>
+    <%- include('headImports')%>
+</head>
+
+<body>
+    <%- include('navbar')%>
+        <div class="dropdown">
+            <button class="dropbtn">Category</button>
+            <div class="dropdown-content">
+                <a id="filterApplications" href="#">
+                    <img src="/../media/filter/genre.png" width="15" height="15"> Applications
+                </a>
+                <a id="filterGames" href="#">
+                    <img src="/../media/filter/topselling.png" width="15" height="15"> Games
+                </a>
+                <a id="filterMovies" href="#">
+                    <img src="/../media/filter/newreleases.png" width="15" height="15"> Movies
+                </a>
+                <a id="filterBooks" href="#">
+                    <img src="/../media/filter/gooddeals.png" width="15" height="15"> Books
+                </a>
+            </div>
+        </div>
+
+        <div id="content">
+            <% for (var i=0;i<items.length;i++) {%>
+                <div class="itemsRow">
+                    <% for (var j=0;j<items[i].length;j++) {%>
+                        <% if (["Book", "Movie" ].includes(items[i][j].constructor.modelName)) { %>
+                            <div class="itemBox largeItemBoxHome">
+                                <% } else { %>
+                                    <div class="itemBox">
+                                        <% } %>
+                                            <div class="movieImageDiv">
+                                                <% if ("Movie".includes(items[i][j].constructor.modelName)) { %>
+                                                    <div class="overlay">
+                                                        <a href="<%=items[i][j].trailerLink%>" class="playIcon"
+                                                            title="Play">
+                                                            <i class="fa fa-play-circle-o"></i>
+                                                        </a>
+                                                    </div>
+                                                    <% } %>
+                                                        <img class="itemImage" src="<%=items[i][j].image%>" alt="Image">
+                                            </div>
+                                            <a
+                                                href="/item?itemType=<%=items[i][j].constructor.modelName%>&itemId=<%=items[i][j]._id%>">
+                                                <p class="itemTitle">
+                                                    <%=items[i][j].title%>
+                                                </p>
+                                            </a>
+                                            <p class="itemType">
+                                                <%=items[i][j].constructor.modelName%>
+                                            </p>
+                                            <p class="itemId">
+                                                <%=items[i][j]._id%>
+                                            </p>
+                                            <% if (username) { %>
+                                                <% if (wishlist.includes(items[i][j]._id)) { %>
+                                                    <a href=""><i class="fa fa-bookmark bookmark"></i></a>
+                                                    <% } else { %>
+                                                        <a href=""><i class="fa fa-bookmark-o bookmark"></i></a>
+                                                        <% } %>
+                                                            <% } %>
+                                                                <p class="itemPrice">
+                                                                    <% if (items[i][j].price===0) { %>
+                                                                        Free
+                                                                        <% } else { %>
+                                                                            <%=items[i][j].price%>$
+                                                                                <% } %>
+                                                                </p>
+                                    </div>
+                                    <%} %>
+                            </div>
+                            <%} %>
+                                <%- include('footer')%>
+                </div>
+</body>
+
+</html>

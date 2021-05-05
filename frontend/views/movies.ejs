@@ -9,42 +9,94 @@
 
 <body>
     <%- include('navbar')%>
-    <h1 class="page_title">MOVIES</h1>
-
+        <h1 class="page_title">MOVIES</h1>
         <div id="content">
-            <div class="itemsRow">
-                <% for (var i=0;i<movies.length;i++) {%>
-                    <div class="itemBox largeItemBox">
-                        <img class="itemImage" src="<%=movies[i].image%>" alt="Image">
-                        <a href="/item?itemType=<%=movies[i].constructor.modelName%>&itemId=<%=movies[i]._id%>">
+            <h3>Top Selling movies</h3>
+            <a href="/movies/topSelling"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
+                <% for (var i=0;i<moviesTopSelling.length;i++) {%>
+                    <div class="itemBox largeItemBoxHome">
+                        <div class="movieImageDiv">
+                            <div class="overlay">
+                                <a href="<%=moviesTopSelling[i].trailerLink%>" class="playIcon" title="Play">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </a>
+                            </div>
+                            <img class="itemImage" src="<%=moviesTopSelling[i].image%>" alt="Image">
+                        </div>
+                        <a
+                            href="/item?itemType=<%=moviesTopSelling[i].constructor.modelName%>&itemId=<%=moviesTopSelling[i]._id%>">
                             <p class="itemTitle">
-                                <%=movies[i].title%>
+                                <%=moviesTopSelling[i].title%>
                             </p>
                         </a>
                         <p class="itemType">
-                            <%=movies[i].constructor.modelName%>
+                            <%=moviesTopSelling[i].constructor.modelName%>
                         </p>
                         <p class="itemId">
-                            <%=movies[i]._id%>
+                            <%=moviesTopSelling[i]._id%>
                         </p>
                         <% if (username) { %>
-                            <% if (wishlist.includes(movies[i]._id)) { %>
+                            <% if (wishlist.includes(moviesTopSelling[i]._id)) { %>
                                 <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
                                     <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
-                                    <p class="itemPrice">
-                                        <% if (movies[i].price===0) { %>
-                                            Free
-                                            <% } else { %>
-                                                <%=movies[i].price%>$
-                                                    <% } %>
-                                    </p>
+                                            <p class="itemPrice">
+                                                <% if (moviesTopSelling[i].price===0) { %>
+                                                    Free
+                                                    <% } else { %>
+                                                        <%=moviesTopSelling[i].price%>$
+                                                            <% } %>
+                                            </p>
                     </div>
                     <%}%>
             </div>
-
+            <h3>New Release movies</h3>
+            <a href="/movies/newestReleases"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
+                <% for (var i=0;i<moviesNewest.length;i++) {%>
+                    <div class="itemBox largeItemBoxHome">
+                        <div class="movieImageDiv">
+                            <% if ("Movie".includes(moviesNewest[i].constructor.modelName)) { %>
+                                <div class="overlay">
+                                    <a href="<%=moviesNewest[i].trailerLink%>" class="playIcon" title="Play">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </a>
+                                </div>
+                                <% } %>
+                                    <img class="itemImage" src="<%=moviesNewest[i].image%>" alt="Image">
+                        </div>
+                        <a
+                            href="/item?itemType=<%=moviesNewest[i].constructor.modelName%>&itemId=<%=moviesNewest[i]._id%>">
+                            <p class="itemTitle">
+                                <%=moviesNewest[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=moviesNewest[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=moviesNewest[i]._id%>
+                        </p>
+                        <% if (username) { %>
+                            <% if (wishlist.includes(moviesNewest[i]._id)) { %>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <% } else { %>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <% } %>
+                                        <% } %>
+                                            <p class="itemPrice">
+                                                <% if (moviesNewest[i].price===0) { %>
+                                                    Free
+                                                    <% } else { %>
+                                                        <%=moviesNewest[i].price%>$
+                                                            <% } %>
+                                            </p>
+                    </div>
+                    <%}%>
+            </div>
             <%- include('footer')%>
         </div>
 </body>

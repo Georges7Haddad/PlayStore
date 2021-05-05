@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Play Store</title>
+    <%- include('headImports')%>
+</head>
+
+<body>
+    <%- include('navbar')%>
+        <h1 class="page_title">BOOKS</h1>
+
+        <div id="content">
+            <div class="itemsRow">
+                <% for (var i=0;i<books.length;i++) {%>
+                    <div class="itemBox largeItemBoxHome">
+                        <img class="itemImage" src="<%=books[i].image%>" alt="Image">
+                        <a href="/item?itemType=<%=books[i].constructor.modelName%>&itemId=<%=books[i]._id%>">
+                            <p class="itemTitleHome">
+                                <%=books[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=books[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=books[i]._id%>
+                        </p>
+                        <% if (username) { %>
+                            <% if (wishlist.includes(books[i]._id)) { %>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <% } else { %>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <% } %>
+                                        <% } %>
+                                            <p class="itemPrice">
+                                                <% if (books[i].price===0) { %>
+                                                    Free
+                                                    <% } else { %>
+                                                        <%=books[i].price%>$
+                                                            <% } %>
+                                            </p>
+                    </div>
+                    <%}%>
+            </div>
+
+            <%- include('footer')%>
+        </div>
+</body>
+
+</html>
