@@ -52,7 +52,14 @@
             <div class="itemsRowHome">
                 <% for (var i=0;i<topSellingMovies.length;i++) {%>
                     <div class="itemBox largeItemBoxHome">
-                        <img class="itemImage" src="<%=topSellingMovies[i].image%>" alt="Image">
+                        <div class="movieImageDiv">
+                            <div class="overlay">
+                                <a href="<%=topSellingMovies[i].trailerLink%>" class="playIcon" title="Play">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </a>
+                            </div>
+                            <img class="itemImage" src="<%=topSellingMovies[i].image%>" alt="Image">
+                        </div>
                         <a
                             href="/item?itemType=<%=topSellingMovies[i].constructor.modelName%>&itemId=<%=topSellingMovies[i]._id%>">
                             <p class="itemTitle">

@@ -26,11 +26,21 @@
   text-align: right;
 }
 
-.itemBox .itemImageHome {
-  margin-left: 20px;
-  margin-right: 20px;
-  border-radius: 5%;
+.itemBox .itemTitle {
+  color: black;
 }
+.itemBox a {
+  text-decoration: none;
+}
+.itemBox a:hover {
+  text-decoration: underline;
+}
+
+.itemImage {
+  width: 150px;
+  height: 150px;
+}
+
 .itemBox .itemTitleHome {
   text-align: center;
   margin: 3px;
@@ -66,11 +76,7 @@
   float: left;
 }
 
-.largeItemBoxHome .itemImageHome {
-  border-radius: 5%;
+.largeItemBoxHome .itemImage {
   height: 235px;
   width: 160px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
 }

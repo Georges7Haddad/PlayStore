@@ -13,16 +13,16 @@
             <button class="dropbtn">Category</button>
             <div class="dropdown-content">
                 <a id="filterApplications" href="#">
-                    <img src="media/filter/genre.png" width="15" height="15"> Applications
+                    <img src="/../media/filter/genre.png" width="15" height="15"> Applications
                 </a>
                 <a id="filterGames" href="#">
-                    <img src="media/filter/topselling.png" width="15" height="15"> Games
+                    <img src="/../media/filter/topselling.png" width="15" height="15"> Games
                 </a>
                 <a id="filterMovies" href="#">
-                    <img src="media/filter/newreleases.png" width="15" height="15"> Movies
+                    <img src="/../media/filter/newreleases.png" width="15" height="15"> Movies
                 </a>
                 <a id="filterBooks" href="#">
-                    <img src="media/filter/gooddeals.png" width="15" height="15"> Books
+                    <img src="/../media/filter/gooddeals.png" width="15" height="15"> Books
                 </a>
             </div>
         </div>
@@ -36,7 +36,17 @@
                                 <% } else { %>
                                     <div class="itemBox">
                                         <% } %>
-                                            <img class="itemImage" src="<%=items[i][j].image%>" alt="Image">
+                                            <div class="movieImageDiv">
+                                                <% if ("Movie".includes(items[i][j].constructor.modelName)) { %>
+                                                    <div class="overlay">
+                                                        <a href="<%=items[i][j].trailerLink%>" class="playIcon"
+                                                            title="Play">
+                                                            <i class="fa fa-play-circle-o"></i>
+                                                        </a>
+                                                    </div>
+                                                    <% } %>
+                                                        <img class="itemImage" src="<%=items[i][j].image%>" alt="Image">
+                                            </div>
                                             <a
                                                 href="/item?itemType=<%=items[i][j].constructor.modelName%>&itemId=<%=items[i][j]._id%>">
                                                 <p class="itemTitle">

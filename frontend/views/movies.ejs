@@ -16,7 +16,14 @@
             <div class="itemsRowHome">
                 <% for (var i=0;i<moviesTopSelling.length;i++) {%>
                     <div class="itemBox largeItemBoxHome">
-                        <img class="itemImage" src="<%=moviesTopSelling[i].image%>" alt="Image">
+                        <div class="movieImageDiv">
+                            <div class="overlay">
+                                <a href="<%=moviesTopSelling[i].trailerLink%>" class="playIcon" title="Play">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </a>
+                            </div>
+                            <img class="itemImage" src="<%=moviesTopSelling[i].image%>" alt="Image">
+                        </div>
                         <a
                             href="/item?itemType=<%=moviesTopSelling[i].constructor.modelName%>&itemId=<%=moviesTopSelling[i]._id%>">
                             <p class="itemTitle">
@@ -51,7 +58,16 @@
             <div class="itemsRowHome">
                 <% for (var i=0;i<moviesNewest.length;i++) {%>
                     <div class="itemBox largeItemBoxHome">
-                        <img class="itemImage" src="<%=moviesNewest[i].image%>" alt="Image">
+                        <div class="movieImageDiv">
+                            <% if ("Movie".includes(moviesNewest[i].constructor.modelName)) { %>
+                                <div class="overlay">
+                                    <a href="<%=moviesNewest[i].trailerLink%>" class="playIcon" title="Play">
+                                        <i class="fa fa-play-circle-o"></i>
+                                    </a>
+                                </div>
+                                <% } %>
+                                    <img class="itemImage" src="<%=moviesNewest[i].image%>" alt="Image">
+                        </div>
                         <a
                             href="/item?itemType=<%=moviesNewest[i].constructor.modelName%>&itemId=<%=moviesNewest[i]._id%>">
                             <p class="itemTitle">

@@ -1,0 +1,31 @@
+.movieImageDiv {
+  position: relative;
+  width: 100%;
+  max-width: 180px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: 0.5s ease;
+}
+
+.movieImageDiv:hover .overlay {
+  opacity: 1;
+}
+
+.fa-play-circle-o:before {
+  color: white;
+  font-size: 70px;
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}

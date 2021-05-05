@@ -297,14 +297,26 @@ module.exports = function (app) {
   app.get("/item", (req, res) => {
     let itemType = req.query.itemType;
     let itemId = req.query.itemId;
-    eval(itemType)
-      .find({ _id: ObjectID(itemId) })
-      .then((item) => {
-        res.render(`../../frontend/views/item`, {
-          item: item,
-          username: req.session.passport ? req.session.passport.user : "",
+    const promise1 = new Promise((resolve, reject) => {
+      eval(itemType)
+        .find({ _id: ObjectID(itemId) })
+        .then((item) => {
+          resolve(item);
         });
+    });
+    const promise2 = new Promise((resolve, reject) => {
+      Review.find({ itemId: itemId }).then((reviews) => {
+        resolve(reviews);
       });
+    });
+
+    Promise.all([promise1, promise2]).then((values) => {
+      res.render(`../../frontend/views/item`, {
+        item: values[0],
+        reviews: values[1],
+        username: req.session.passport ? req.session.passport.user : "",
+      });
+    });
   });
 
   // Add item to last 24 visited
@@ -456,10 +468,21 @@ function getNewestReleases(model, itemType, req, res) {
     .find()
     .sort("-dateOfRelease")
     .then((items) => {
-      res.render(`../../frontend/views/${itemType}Top`, {
-        [itemType]: items,
-        username: req.session.passport ? req.session.passport.user : "",
-      });
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render(`../../frontend/views/${itemType}Top`, {
+            [itemType]: items,
+            wishlist: user.wishlist.map((item) => item.id),
+            username: req.session.passport.user,
+          });
+        });
+      } else {
+        res.render(`../../frontend/views/${itemType}Top`, {
+          [itemType]: items,
+          wishlist: [],
+          username: "",
+        });
+      }
     });
 }
 
@@ -468,10 +491,21 @@ function getTopSelling(model, itemType, req, res) {
     .find()
     .sort("-copiesSold")
     .then((items) => {
-      res.render(`../../frontend/views/${itemType}Top`, {
-        [itemType]: items,
-        username: req.session.passport ? req.session.passport.user : "",
-      });
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render(`../../frontend/views/${itemType}Top`, {
+            [itemType]: items,
+            wishlist: user.wishlist.map((item) => item.id),
+            username: req.session.passport.user,
+          });
+        });
+      } else {
+        res.render(`../../frontend/views/${itemType}Top`, {
+          [itemType]: items,
+          wishlist: [],
+          username: "",
+        });
+      }
     });
 }
 

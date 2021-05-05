@@ -38,7 +38,6 @@ const moviesSchema = new Schema({
     Director: String,
   },
   description: String,
-  reviews: [reviewSchema],
 });
 
 const booksSchema = new Schema({
@@ -51,7 +50,6 @@ const booksSchema = new Schema({
   image: String,
   averageRating: Number,
   description: String,
-  reviews: [reviewSchema],
 });
 
 const gamesSchema = new Schema({
@@ -64,7 +62,6 @@ const gamesSchema = new Schema({
   image: String,
   averageRating: Number,
   description: String,
-  reviews: [reviewSchema],
 });
 
 const applicationsSchema = new Schema({
@@ -77,7 +74,6 @@ const applicationsSchema = new Schema({
   image: String,
   averageRating: Number,
   description: String,
-  reviews: [reviewSchema],
 });
 
 module.exports = {
