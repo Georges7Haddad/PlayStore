@@ -13,7 +13,7 @@
 
         <div id="content">
             <div class="itemsRow">
-                <% for (var i=0;i<10;i++) {%>
+                <% for (var i=0;i<books.length;i++) {%>
                     <div class="itemBox largeItemBoxHome">
                         <img class="itemImageHome" src="<%=books[i].image%>" alt="Image">
                         <a href="/item?itemType=<%=books[i].constructor.modelName%>&itemId=<%=books[i]._id%>">

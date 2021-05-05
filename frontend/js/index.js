@@ -11,6 +11,7 @@ window.addEventListener("load", () => {
   $("closeModal").addEventListener("click", closeUserFormDialog);
   $("closeModal").addEventListener("click", closeUserFormDialog);
   $("forgotPassword").addEventListener("click", openForgotPasswordDialog);
+  $("navSearch").addEventListener("keyup", search);
 });
 
 function isAuth() {
@@ -100,4 +101,10 @@ function closeUserFormDialog() {
   modal.style.display = "none";
   $("content").style.opacity = "1";
   document.getElementsByTagName("nav")[0].style.opacity = "1";
+}
+
+function search(event) {
+  if (event.keyCode === 13) {
+    window.location.href = `/search?q=${event.target.value}`;
+  }
 }

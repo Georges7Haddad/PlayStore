@@ -9,7 +9,23 @@
 
 <body>
     <%- include('navbar')%>
-
+        <div class="dropdown">
+            <button class="dropbtn">Category</button>
+            <div class="dropdown-content">
+                <a id="filterApplications" href="#">
+                    <img src="media/filter/genre.png" width="15" height="15"> Applications
+                </a>
+                <a id="filterGames" href="#">
+                    <img src="media/filter/topselling.png" width="15" height="15"> Games
+                </a>
+                <a id="filterMovies" href="#">
+                    <img src="media/filter/newreleases.png" width="15" height="15"> Movies
+                </a>
+                <a id="filterBooks" href="#">
+                    <img src="media/filter/gooddeals.png" width="15" height="15"> Books
+                </a>
+            </div>
+        </div>
         <div id="content">
             <div class="itemsRow">
                 <% for (var i=0;i<wishlist.length;i++) {%>

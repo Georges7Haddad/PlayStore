@@ -11,42 +11,77 @@
     <%- include('navbar')%>
         <h1 class="page_title">APPLICATIONS</h1>
         <div id="content">
+            <h3>Top Selling Applications</h3>
+            <a href="/applications/topSelling"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
-                <% for (var i=0;i<10;i++) {%>
+                <% for (var i=0;i<applicationsTopSelling.length;i++) {%>
                     <div class="itemBox">
 
-                        <img class="itemImageHome" src="<%=applications[i].image%>" alt="Image">
+                        <img class="itemImage" src="<%=applicationsTopSelling[i].image%>" alt="Image">
                         <a
-                            href="/item?itemType=<%=applications[i].constructor.modelName%>&itemId=<%=applications[i]._id%>">
-                            <p class="itemTitleHome">
-                                <%=applications[i].title%>
+                            href="/item?itemType=<%=applicationsTopSelling[i].constructor.modelName%>&itemId=<%=applicationsTopSelling[i]._id%>">
+                            <p class="itemTitle">
+                                <%=applicationsTopSelling[i].title%>
                             </p>
                         </a>
                         <p class="itemType">
-                            <%=applications[i].constructor.modelName%>
+                            <%=applicationsTopSelling[i].constructor.modelName%>
                         </p>
                         <p class="itemId">
-                            <%=applications[i]._id%>
+                            <%=applicationsTopSelling[i]._id%>
                         </p>
                         <% if (username) { %>
-                            <% if (wishlist.includes(applications[i]._id)) { %>
+                            <% if (wishlist.includes(applicationsTopSelling[i]._id)) { %>
                                 <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
                                     <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
-                                                <% if (applications[i].price===0) { %>
+                                                <% if (applicationsTopSelling[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=applications[i].price%>$
+                                                        <%=applicationsTopSelling[i].price%>$
                                                             <% } %>
                                             </p>
                     </div>
                     <%}%>
             </div>
-
-            <button class="dropbtn seemore">See More...</button>
+            <h3>New Release Applications</h3>
+            <a href="/applications/newestReleases"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
+                <% for (var i=0;i<applicationsNewest.length;i++) {%>
+                    <div class="itemBox">
+                        <img class="itemImage" src="<%=applicationsNewest[i].image%>" alt="Image">
+                        <a
+                            href="/item?itemType=<%=applicationsNewest[i].constructor.modelName%>&itemId=<%=applicationsNewest[i]._id%>">
+                            <p class="itemTitle">
+                                <%=applicationsNewest[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=applicationsNewest[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=applicationsNewest[i]._id%>
+                        </p>
+                        <% if (username) { %>
+                            <% if (wishlist.includes(applicationsNewest[i]._id)) { %>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <% } else { %>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <% } %>
+                                        <% } %>
+                                            <p class="itemPrice">
+                                                <% if (applicationsNewest[i].price===0) { %>
+                                                    Free
+                                                    <% } else { %>
+                                                        <%=applicationsNewest[i].price%>$
+                                                            <% } %>
+                                            </p>
+                    </div>
+                    <%}%>
+            </div>
             <%- include('footer')%>
         </div>
 </body>

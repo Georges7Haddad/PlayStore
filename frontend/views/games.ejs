@@ -10,42 +10,77 @@
 <body>
     <%- include('navbar')%>
         <h1 class="page_title">GAMES</h1>
-
         <div id="content">
+            <h3>Top Selling Games</h3>
+            <a href="/games/topSelling"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
-                <% for (var i=0;i<8;i++) {%>
+                <% for (var i=0;i<gamesTopSelling.length;i++) {%>
                     <div class="itemBox">
-                        <img class="itemImageHome" src="<%=games[i].image%>" alt="Image">
-                        <a href="/item?itemType=<%=games[i].constructor.modelName%>&itemId=<%=games[i]._id%>">
-                            <p class="itemTitleHome">
-                                <%=games[i].title%>
+                        <img class="itemImage" src="<%=gamesTopSelling[i].image%>" alt="Image">
+                        <a
+                            href="/item?itemType=<%=gamesTopSelling[i].constructor.modelName%>&itemId=<%=gamesTopSelling[i]._id%>">
+                            <p class="itemTitle">
+                                <%=gamesTopSelling[i].title%>
                             </p>
                         </a>
                         <p class="itemType">
-                            <%=games[i].constructor.modelName%>
+                            <%=gamesTopSelling[i].constructor.modelName%>
                         </p>
                         <p class="itemId">
-                            <%=games[i]._id%>
+                            <%=gamesTopSelling[i]._id%>
                         </p>
                         <% if (username) { %>
-                            <% if (wishlist.includes(games[i]._id)) { %>
+                            <% if (wishlist.includes(gamesTopSelling[i]._id)) { %>
                                 <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
                                     <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
-                                                <% if (games[i].price===0) { %>
+                                                <% if (gamesTopSelling[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=games[i].price%>$
+                                                        <%=gamesTopSelling[i].price%>$
                                                             <% } %>
                                             </p>
                     </div>
                     <%}%>
             </div>
-
-            <button class="dropbtn seemore">See More...</button>
+            <h3>New Release Games</h3>
+            <a href="/games/newestReleases"><button class="dropbtn seemore">See More...</button></a>
+            <div class="itemsRowHome">
+                <% for (var i=0;i<gamesNewest.length;i++) {%>
+                    <div class="itemBox">
+                        <img class="itemImage" src="<%=gamesNewest[i].image%>" alt="Image">
+                        <a
+                            href="/item?itemType=<%=gamesNewest[i].constructor.modelName%>&itemId=<%=gamesNewest[i]._id%>">
+                            <p class="itemTitle">
+                                <%=gamesNewest[i].title%>
+                            </p>
+                        </a>
+                        <p class="itemType">
+                            <%=gamesNewest[i].constructor.modelName%>
+                        </p>
+                        <p class="itemId">
+                            <%=gamesNewest[i]._id%>
+                        </p>
+                        <% if (username) { %>
+                            <% if (wishlist.includes(gamesNewest[i]._id)) { %>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <% } else { %>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <% } %>
+                                        <% } %>
+                                            <p class="itemPrice">
+                                                <% if (gamesNewest[i].price===0) { %>
+                                                    Free
+                                                    <% } else { %>
+                                                        <%=gamesNewest[i].price%>$
+                                                            <% } %>
+                                            </p>
+                    </div>
+                    <%}%>
+            </div>
             <%- include('footer')%>
         </div>
 </body>

@@ -216,6 +216,84 @@ module.exports = function (app) {
     getNewestReleases(Book, "books", req, res);
   });
 
+  app.get("/search", (req, res) => {
+    let query = req.query.q;
+    const promise1 = new Promise((resolve, reject) => {
+      Book.find({
+        $or: [
+          {
+            title: { $regex: query, $options: "i" },
+          },
+          {
+            description: { $regex: query, $options: "i" },
+          },
+        ],
+      }).then((items) => {
+        resolve(items);
+      });
+    });
+    const promise2 = new Promise((resolve, reject) => {
+      Application.find({
+        $or: [
+          {
+            title: { $regex: query, $options: "i" },
+          },
+          {
+            description: { $regex: query, $options: "i" },
+          },
+        ],
+      }).then((items) => {
+        resolve(items);
+      });
+    });
+    const promise3 = new Promise((resolve, reject) => {
+      Game.find({
+        $or: [
+          {
+            title: { $regex: query, $options: "i" },
+          },
+          {
+            description: { $regex: query, $options: "i" },
+          },
+        ],
+      }).then((items) => {
+        resolve(items);
+      });
+    });
+    const promise4 = new Promise((resolve, reject) => {
+      Movie.find({
+        $or: [
+          {
+            title: { $regex: query, $options: "i" },
+          },
+          {
+            description: { $regex: query, $options: "i" },
+          },
+        ],
+      }).then((items) => {
+        resolve(items);
+      });
+    });
+
+    Promise.all([promise1, promise2, promise3, promise4]).then((values) => {
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render(`../../frontend/views/search`, {
+            items: values,
+            wishlist: user.wishlist.map((item) => item.id),
+            username: req.session.passport.user,
+          });
+        });
+      } else {
+        res.render(`../../frontend/views/search`, {
+          items: values,
+          wishlist: [],
+          username: "",
+        });
+      }
+    });
+  });
+
   app.get("/item", (req, res) => {
     let itemType = req.query.itemType;
     let itemId = req.query.itemId;
@@ -332,7 +410,6 @@ function addItemToUser(req, res, listName) {
   let item = req.body;
   User.findOne({ username: username }).then((user) => {
     let index = user[listName].findIndex((element) => element.id === item.id);
-    console.log(index);
     if (index === -1) {
       user[listName].unshift(item);
       user.save();
@@ -344,22 +421,33 @@ function addItemToUser(req, res, listName) {
 }
 
 function getItemsPage(model, itemType, req, res) {
-  model.find().then((items) => {
-    if (req.session.passport) {
-      User.findOne({ username: req.session.passport.user }).then((user) => {
-        res.render(`../../frontend/views/${itemType}`, {
-          [itemType]: items,
-          wishlist: user.wishlist.map((item) => item.id),
-          username: req.session.passport.user,
+  const promise1 = new Promise((resolve, reject) => {
+    get10TopSelling(model, resolve);
+  });
+  const promise2 = new Promise((resolve, reject) => {
+    get10Newest(model, resolve);
+  });
+
+  Promise.all([promise1, promise2]).then((values) => {
+    model.find().then((items) => {
+      if (req.session.passport) {
+        User.findOne({ username: req.session.passport.user }).then((user) => {
+          res.render(`../../frontend/views/${itemType}`, {
+            [`${itemType}TopSelling`]: values[0],
+            [`${itemType}Newest`]: values[1],
+            wishlist: user.wishlist.map((item) => item.id),
+            username: req.session.passport.user,
+          });
         });
-      });
-    } else {
-      res.render(`../../frontend/views/${itemType}`, {
-        [itemType]: items,
-        wishlist: [],
-        username: "",
-      });
-    }
+      } else {
+        res.render(`../../frontend/views/${itemType}`, {
+          [`${itemType}TopSelling`]: values[0],
+          [`${itemType}Newest`]: values[1],
+          wishlist: [],
+          username: "",
+        });
+      }
+    });
   });
 }
 
