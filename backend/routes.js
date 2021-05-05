@@ -13,7 +13,6 @@ passport.serializeUser(User.serializeUser()); //session encoding
 passport.deserializeUser(User.deserializeUser()); //session decoding
 passport.use(new LocalStrategy(User.authenticate()));
 var nodemailer = require("nodemailer");
-const { render } = require("ejs");
 
 module.exports = function (app) {
   app.get("/addData", (req, res) => {
@@ -319,6 +318,44 @@ module.exports = function (app) {
     });
   });
 
+  app.post("/item/:reviewId/like", (req, res) => {
+    if (req.session.passport) {
+      let reviewId = req.params.reviewId;
+      let username = req.session.passport.user;
+      Review.findOne({ _id: ObjectID(reviewId) }).then((review) => {
+        let index = review.likes.findIndex((element) => element === username);
+        if (index === -1) {
+          review.likes.push(username);
+          review.save();
+          res.send(`Review Liked`);
+        } else {
+          res.send("Already Liked");
+        }
+      });
+    } else {
+      res.send("User not authenticated");
+    }
+  });
+
+  app.delete("/item/:reviewId/like", (req, res) => {
+    if (req.session.passport) {
+      let reviewId = req.params.reviewId;
+      let username = req.session.passport.user;
+      Review.findOne({ _id: ObjectID(reviewId) }).then((review) => {
+        let index = review.likes.findIndex((element) => element === username);
+        if (index > -1) {
+          review.likes.splice(index, 1);
+          review.save();
+          res.send("Review Disliked");
+        } else {
+          res.send("Review was never liked");
+        }
+      });
+    } else {
+      res.send("User not authenticated");
+    }
+  });
+
   // Add item to last 24 visited
   app.post("/user/:username/last24VisitedItems", (req, res) => {
     addItemToUser(req, res, "last24VisitedItems");
@@ -540,5 +577,6 @@ function addData() {
     addItems(movies, Movie);
     addItems(games, Game);
     addItems(applications, Application);
+    addItems(reviews, Review);
   });
 }

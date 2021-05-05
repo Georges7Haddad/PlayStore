@@ -1,16 +1,24 @@
 .item_box {
-    height: 80%;
-    top: 35px;
-    margin: auto;
-    padding: 40px;
-    background-color: rgb(228, 226, 226);
-    position: relative;
+  height: 80%;
+  top: 35px;
+  margin: auto;
+  padding: 40px;
+  background-color: rgb(228, 226, 226);
+  position: relative;
 }
 
 .photo_title {
-    display: flex;
+  display: flex;
 }
 
 .details {
-    padding-left: 40px;
+  padding-left: 40px;
+}
+
+.like {
+  color: grey;
+}
+
+.dislike {
+  color: #0d4b84;
 }

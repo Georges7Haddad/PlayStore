@@ -28,8 +28,8 @@
         </div>
 
         <div id="content">
-            <% for (var i=0;i<items.length;i++) {%>
-                <div class="itemsRow">
+            <div class="itemsRow">
+                <% for (var i=0;i<items.length;i++) {%>
                     <% for (var j=0;j<items[i].length;j++) {%>
                         <% if (["Book", "Movie" ].includes(items[i][j].constructor.modelName)) { %>
                             <div class="itemBox largeItemBoxHome">
@@ -75,10 +75,10 @@
                                                                 </p>
                                     </div>
                                     <%} %>
+                                        <%} %>
                             </div>
-                            <%} %>
-                                <%- include('footer')%>
-                </div>
+                            <%- include('footer')%>
+            </div>
 </body>
 
 </html>

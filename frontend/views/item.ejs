@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>Play Store</title>
+    <script src="/../js/item.js"></script>
     <%- include('headImports')%>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
             integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -62,10 +63,28 @@
             <h4>
                 <%=item[0].description%>
             </h4>
-            <h1>
-                <%=reviews%>
-            </h1>
-
+            <% for (var i=0;i<reviews.length;i++) {%>
+                <div class="review">
+                    <p class="reviewId">
+                        <%=reviews[i]._id%>
+                    </p>
+                    <p>
+                        <%=reviews[i].text%>
+                    </p>
+                    <p>
+                        <%=reviews[i].likes%>
+                    </p>
+                    <br>
+                    <% if (username) { %>
+                        <% if (reviews[i].likes.includes(username)) { %>
+                            <a href="#"><i class="fa fa-thumbs-up dislike"></i></a>
+                            <% } else { %>
+                                <a href="#"><i class="fa fa-thumbs-up like"></i></a>
+                                <% } %>
+                                    <% } %>
+                                        <%} %>
+                                            <br>
+                </div>
         </div>
 
         <div id="content">

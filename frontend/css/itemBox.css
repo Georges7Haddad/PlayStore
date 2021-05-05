@@ -44,6 +44,7 @@
 .itemBox .itemTitleHome {
   text-align: center;
   margin: 3px;
+  color: black;
 }
 .itemBox .itemType {
   font-size: small;
@@ -51,6 +52,10 @@
 }
 
 .itemBox .itemId {
+  display: none;
+}
+
+.reviewId {
   display: none;
 }
 
