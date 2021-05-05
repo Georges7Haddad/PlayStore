@@ -25,8 +25,8 @@ function isAuth() {
       authenticated = data.isAuth;
       if (authenticated === "true") {
         user = data.user;
+        $("pp").src="../media/pics/" + data.pic
         $("pp").style.display = "";
-        $("pp").src = user.profilePicture;
         $("signupNavButton").style.display = "none";
         $("loginNavButton").style.display = "none";
         $("logoutNavButton").style.display = "";
@@ -66,6 +66,7 @@ function opensignupDialog() {
   $("userFormButton").innerText = "Sign Up";
   $("loginExtrasDiv").style.display = "none";
   $("userForm").action = "/register";
+  $("userForm").enctype="multipart/form-data";
   $("RegisterExtrasDiv").style.display = "";
   $("registerLoginDiv").style.display = "";
   $("forgotPasswordDiv").style.display = "none";

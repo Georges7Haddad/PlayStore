@@ -15,6 +15,17 @@ passport.deserializeUser(User.deserializeUser()); //session decoding
 passport.use(new LocalStrategy(User.authenticate()));
 var nodemailer = require('nodemailer');
 const { render } = require("ejs");
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: function(req,file,cb){
+    cb(null, '../frontend/media/pics');
+  },
+  filename: function(req, file, cb){
+    cb(null, file.originalname)
+  }
+});
+const upload = multer({storage:storage});
 
 module.exports = function (app) {
 
@@ -29,13 +40,13 @@ module.exports = function (app) {
     res.redirect(req.headers.referer);
   });
 
-  app.post("/register", (req, res) => {
-    User.register(
+  app.post("/register", upload.single('image'),(req, res) => {
+    if(req.file){    
+      User.register(
       new User({
         username: req.body.username,
-        profilePicture:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTOkHm3_mPQ5PPRvGtU6Si7FJg8DVDtZ47rw&usqp=CAU",
-        email : req.body.email
+        email : req.body.email,
+        profilePicture: req.file['filename']
       }),
       req.body.password,
       function (err, user) {
@@ -47,7 +58,27 @@ module.exports = function (app) {
           res.redirect("/");
         });
       }
-    );
+    );}
+    else{
+      User.register(
+        new User({
+          username: req.body.username,
+          email : req.body.email,
+          profilePicture: ""
+        }),
+        req.body.password,
+        function (err, user) {
+          if (err) {
+            console.log(err);
+            res.render("../../frontend/views/home");
+          }
+          passport.authenticate("local")(req, res, function () {
+            res.redirect("/");
+          });
+        }
+      );
+    }
+
   });
 
   app.get("/logout", (req, res) => {
@@ -59,10 +90,30 @@ module.exports = function (app) {
   app.get("/auth", function (req, res) {
     if (req.session.passport) {
       User.findOne({ username: req.session.passport.user }).then((user) => {
-        res.send({ isAuth: "true", user: user });
+        if(user.profilePicture!=""){
+          res.send({ isAuth: "true", user: user, pic: user.profilePicture });
+        }
+        else{
+          res.send({ isAuth: "true", user: user, pic: "default.jpg" });
+        }
       });
     } else {
       res.send({ isAuth: "false" });
+    }
+  });
+
+  app.get("/profilepic", function (req, res){
+    if (req.session.passport) {
+      User.findOne({ username: req.session.passport.user }).then((user) => {
+        if(user.profilePicture){
+          res.send({ isAuth: "true", user: user, pic: user.profilePicture });
+        }
+        else{
+          res.send({ isAuth: "true", user: user });
+        }
+      });
+    } else {
+      res.send({ pic: "Not Authenticated"});
     }
   });
 
