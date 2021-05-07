@@ -22,3 +22,9 @@
 .dislike {
   color: #0d4b84;
 }
+
+.titleBar {
+  background-color: #657e95; 
+  color: white; 
+  text-align: center;
+}

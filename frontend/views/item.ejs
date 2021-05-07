@@ -8,7 +8,7 @@
     <%- include('headImports')%>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
             integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-</head>
+</head> 
 
 <body>
     <%- include('navbar')%>
@@ -50,9 +50,7 @@
                         <%=item[0].title%>
                     </h1>
                     <p><i class="fas fa-star"></i> Average Rating: <%=item[0].averageRating%> / 10</p>
-                    <p><i class="fas fa-user"></i> Number of Reviews: <%=item[0].reviews%>
-
-                    </p>
+                    <p><i class="fas fa-user"></i> Number of Reviews:<%= reviews.length %></p>
                     <p><i class="fas fa-tag"></i> Price:
                         <% if (item[0].price===0) { %>
                             Free
@@ -65,9 +63,39 @@
 
                 </div>
             </div>
+            <h2 class="titleBar"> Description </h2>
             <h4>
                 <%=item[0].description%>
             </h4>
+
+            <% if(item[0].constructor.modelName === "Application" || "Game") {%>
+                <h2 class="titleBar"> Creator </h2> 
+                <%=item[0].creator%> <% } %> 
+            <% if(item[0].constructor.modelName === "Book"){%>
+                <h2 class="titleBar"> Author </h2> 
+                <%=item[0].author%> <% } %> 
+            <% if(item[0].constructor.modelName == "Movie"){%>
+
+            <h2 class="titleBar"> Cast and Credits </h2>
+
+            <h4>
+                <ul>
+                    <li><% if (item[0].castAndCredits.actors.length != 0) {%>
+                    Actors: <%=item[0].castAndCredits.actors%>
+                    <% } %> </li><br>
+
+                 <li><% if (item[0].castAndCredits.producers.length != 0) {%>
+                    Producer(s): <%=item[0].castAndCredits.producers%>
+                 <% } %></li><br>
+
+                 <li><% if (item[0].castAndCredits.Director.length != 0) {%>
+                    Director: <%=item[0].castAndCredits.Director%>
+                 <% } %></li><br>
+                </ul>
+            </h4>
+            <% } %> 
+
+            <h2 class="titleBar"> Reviews </h2>
 
             <% for (var i=0;i<reviews.length;i++) {%>
                 <div class="review">
