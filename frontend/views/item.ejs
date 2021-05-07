@@ -41,14 +41,17 @@
                             </a>
                         </div>
                         <% } %>
-                            <img class="itemImage" src="<%=item[0].image%>" alt="Image">
+                            <img class="itemPageImg" src="<%=item[0].image%>" alt="Image">
                 </div>
+                
+
                 <div class="details">
                     <h1>
                         <%=item[0].title%>
                     </h1>
                     <p><i class="fas fa-star"></i> Average Rating: <%=item[0].averageRating%> / 10</p>
                     <p><i class="fas fa-user"></i> Number of Reviews: <%=item[0].reviews%>
+
                     </p>
                     <p><i class="fas fa-tag"></i> Price:
                         <% if (item[0].price===0) { %>
@@ -58,11 +61,14 @@
                                     <% } %>
 
                     </p>
+                    <p><i class="fas fa-theater-masks"></i> Genre: <%=item[0].genre%>
+
                 </div>
             </div>
             <h4>
                 <%=item[0].description%>
             </h4>
+
             <% for (var i=0;i<reviews.length;i++) {%>
                 <div class="review">
                     <p class="reviewId">

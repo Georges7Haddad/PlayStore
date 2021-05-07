@@ -12,7 +12,6 @@
         <h1 class="page_title">BOOKS</h1>
         <div id="content">
             <h3>Top Selling Books</h3>
-            <a href="/books/topSelling"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0;i<booksTopSelling.length;i++) {%>
                     <div class="itemBox largeItemBoxHome">
@@ -46,8 +45,9 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/books/topSelling" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
             <h3>New Release Books</h3>
-            <a href="/books/newestReleases"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0;i<booksNewest.length;i++) {%>
                     <div class="itemBox largeItemBoxHome">
@@ -81,6 +81,8 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/books/newestReleases" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
             <%- include('footer')%>
         </div>
 </body>

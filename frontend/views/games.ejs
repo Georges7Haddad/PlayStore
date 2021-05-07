@@ -12,7 +12,6 @@
         <h1 class="page_title">GAMES</h1>
         <div id="content">
             <h3>Top Selling Games</h3>
-            <a href="/games/topSelling"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0;i<gamesTopSelling.length;i++) {%>
                     <div class="itemBox">
@@ -46,8 +45,10 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/games/topSelling" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
+            
             <h3>New Release Games</h3>
-            <a href="/games/newestReleases"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0;i<gamesNewest.length;i++) {%>
                     <div class="itemBox">
@@ -81,6 +82,8 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/games/newestReleases" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
             <%- include('footer')%>
         </div>
 </body>

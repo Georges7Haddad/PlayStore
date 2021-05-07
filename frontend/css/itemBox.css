@@ -40,7 +40,9 @@
   width: 150px;
   height: 150px;
 }
-
+.itemPageImg {
+  width: 150px;
+}
 .itemBox .itemTitleHome {
   text-align: center;
   margin: 3px;
@@ -67,8 +69,8 @@
 
 .largeItemBoxHome {
   padding: 0;
-  width: 190px;
-  height: 360px;
+  width: 160px;
+  height: 370px;
   white-space: wrap;
 }
 

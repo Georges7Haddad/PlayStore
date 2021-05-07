@@ -12,7 +12,6 @@
         <h1 class="page_title">HOME</h1>
         <div id="content">
             <h3>Top Selling Applications</h3>
-            <a href="/applications/topSelling"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0; i < topSellingApplications.length;i++) {%>
                     <div class="itemBox">
@@ -47,8 +46,9 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/applications/topSelling" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
             <h3>Top Selling Movies</h3>
-            <a href="/movies/topSelling"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0;i<topSellingMovies.length;i++) {%>
                     <div class="itemBox largeItemBoxHome">
@@ -89,8 +89,9 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/movies/topSelling" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
             <h3>New Release Games</h3>
-            <a href="/games/newestReleases"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0;i<newestGames.length;i++) {%>
                     <div class="itemBox">
@@ -125,8 +126,9 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/games/newestReleases" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
             <h3>New Release Books</h3>
-            <a href="/books/newestReleases"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0;i<newestBooks.length;i++) {%>
                     <div class="itemBox largeItemBoxHome">
@@ -160,6 +162,8 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/books/newestReleases" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
             <%- include('footer')%>
         </div>
 

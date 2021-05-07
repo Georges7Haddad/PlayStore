@@ -12,7 +12,6 @@
         <h1 class="page_title">APPLICATIONS</h1>
         <div id="content">
             <h3>Top Selling Applications</h3>
-            <a href="/applications/topSelling"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0;i<applicationsTopSelling.length;i++) {%>
                     <div class="itemBox">
@@ -47,8 +46,9 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/applications/topSelling" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
             <h3>New Release Applications</h3>
-            <a href="/applications/newestReleases"><button class="dropbtn seemore">See More...</button></a>
             <div class="itemsRowHome">
                 <% for (var i=0;i<applicationsNewest.length;i++) {%>
                     <div class="itemBox">
@@ -82,6 +82,8 @@
                     </div>
                     <%}%>
             </div>
+            <a href="/applications/newestReleases" class="seemorebutton"><button class="dropbtn seemore">See More...</button></a>
+
             <%- include('footer')%>
         </div>
 </body>

@@ -114,3 +114,8 @@ button.navButtons {
 .dropdown:hover .dropbtn {
   background-color: rgb(122, 175, 175);
 }
+
+.seemorebutton {
+  width: 100%; 
+  float: right;
+}
