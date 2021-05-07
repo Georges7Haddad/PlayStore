@@ -18,7 +18,7 @@
                     <div class="itemBox largeItemBoxHome">
                         <div class="movieImageDiv">
                             <div class="overlay">
-                                <a href="<%=moviesTopSelling[i].trailerLink%>" class="playIcon" title="Play">
+                                <a href="<%=moviesTopSelling[i].trailerLink%>" target="_blank" class="playIcon" title="Play">
                                     <i class="fa fa-play-circle-o"></i>
                                 </a>
                             </div>
@@ -61,7 +61,7 @@
                         <div class="movieImageDiv">
                             <% if ("Movie".includes(moviesNewest[i].constructor.modelName)) { %>
                                 <div class="overlay">
-                                    <a href="<%=moviesNewest[i].trailerLink%>" class="playIcon" title="Play">
+                                    <a href="<%=moviesNewest[i].trailerLink%>" target="_blank" class="playIcon" title="Play">
                                         <i class="fa fa-play-circle-o"></i>
                                     </a>
                                 </div>

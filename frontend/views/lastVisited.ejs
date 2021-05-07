@@ -5,10 +5,28 @@
     <meta charset="UTF-8" />
     <title>Play Store</title>
     <%- include('headImports')%>
+        <script type="text/javascript" src="/../js/categoryFilter.js"></script>
 </head>
 
 <body>
     <%- include('navbar')%>
+        <div class="dropdown">
+            <button class="dropbtn">Sort By</button>
+            <div id="sortDiv" class="dropdown-content">
+                <a href="#">
+                    <img src="/../media/filter/genre.png" width="15" height="15"> Top Rated
+                </a>
+                <a href="#">
+                    <img src="/../media/filter/topselling.png" width="15" height="15"> Top Selling
+                </a>
+                <a href="#">
+                    <img src="/../media/filter/newreleases.png" width="15" height="15"> New Releases
+                </a>
+                <a href="#">
+                    <img src="/../media/filter/gooddeals.png" width="15" height="15"> Cheapest
+                </a>
+            </div>
+        </div>
         <div class="dropdown">
             <button class="dropbtn">Category</button>
             <div class="dropdown-content">
@@ -38,8 +56,8 @@
                                         <div class="movieImageDiv">
                                             <% if ("Movie".includes(last24VisitedItems[i].constructor.modelName)) { %>
                                                 <div class="overlay">
-                                                    <a href="<%=last24VisitedItems[i].trailerLink%>" class="playIcon"
-                                                        title="Play">
+                                                    <a href="<%=last24VisitedItems[i].trailerLink%>" target="_blank"
+                                                        class="playIcon" title="Play">
                                                         <i class="fa fa-play-circle-o"></i>
                                                     </a>
                                                 </div>
@@ -58,6 +76,15 @@
                                         </p>
                                         <p class="itemId">
                                             <%=last24VisitedItems[i]._id%>
+                                        </p>
+                                        <p class="itemCopies">
+                                            <%=last24VisitedItems[i].copiesSold%>
+                                        </p>
+                                        <p class="itemRating">
+                                            <%=last24VisitedItems[i].averageRating%>
+                                        </p>
+                                        <p class="itemDate">
+                                            <%=last24VisitedItems[i].dateOfRelease%>
                                         </p>
                                         <% if (wishlist.includes(last24VisitedItems[i].id)) { %>
                                             <a href="#"><i class="fa fa-bookmark bookmark"></i></a>

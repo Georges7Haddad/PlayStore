@@ -54,6 +54,15 @@
 .itemBox .itemId {
   display: none;
 }
+.itemBox .itemCopies {
+  display: none;
+}
+.itemBox .itemRating {
+  display: none;
+}
+.itemBox .itemDate {
+  display: none;
+}
 
 .reviewId {
   display: none;

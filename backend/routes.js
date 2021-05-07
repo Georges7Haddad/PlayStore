@@ -486,7 +486,7 @@ module.exports = function (app) {
 function get10TopSelling(model, resolve) {
   model
     .find()
-    .sort("-dateOfRelease")
+    .sort("-copiesSold")
     .limit(10)
     .then((items) => {
       resolve(items);
@@ -496,7 +496,7 @@ function get10TopSelling(model, resolve) {
 function get10Newest(model, resolve) {
   model
     .find()
-    .sort("-copiesSold")
+    .sort("-dateOfRelease")
     .limit(10)
     .then((items) => {
       resolve(items);
