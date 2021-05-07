@@ -9,7 +9,25 @@
 
 <body>
     <%- include('navbar')%>
-        <h1 class="page_title">TOP SELLING MOVIES</h1>
+
+    <div class="dropdown">
+        <button class="dropbtn">Sort By</button>
+        <div id="sortDiv" class="dropdown-content">
+            <a href="#">
+                <img src="/../media/filter/genre.png" width="15" height="15"> Top Rated
+            </a>
+            <a href="#">
+                <img src="/../media/filter/topselling.png" width="15" height="15"> Top Selling
+            </a>
+            <a href="#">
+                <img src="/../media/filter/newreleases.png" width="15" height="15"> New Releases
+            </a>
+            <a href="#">
+                <img src="/../media/filter/gooddeals.png" width="15" height="15"> Cheapest
+            </a>
+        </div>
+    </div>
+        <h1 class="page_title">MOVIES</h1>
 
         <div id="content">
             <div class="itemsRow">
@@ -17,7 +35,7 @@
                     <div class="itemBox largeItemBoxHome">
                         <div class="movieImageDiv">
                             <div class="overlay">
-                                <a href="<%=movies[i].trailerLink%>" class="playIcon" title="Play">
+                                <a href="<%=movies[i].trailerLink%>" target="_blank" class="playIcon" title="Play">
                                     <i class="fa fa-play-circle-o"></i>
                                 </a>
                             </div>
@@ -33,6 +51,15 @@
                         </p>
                         <p class="itemId">
                             <%=movies[i]._id%>
+                        </p>
+                        <p class="itemCopies">
+                            <%=movies[i].copiesSold%>
+                        </p>
+                        <p class="itemRating">
+                            <%=movies[i].averageRating%>
+                        </p>
+                        <p class="itemDate">
+                            <%=movies[i].dateOfRelease%>
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(movies[i]._id)) { %>
