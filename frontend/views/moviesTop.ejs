@@ -27,23 +27,6 @@
             </a>
         </div>
     </div>
-    <div class="dropdown">
-        <button class="dropbtn">Filter By Genre</button>
-        <div id="filterDiv" class="dropdown-content">
-            <a href="#">
-                <img src="/../media/filter/genre.png" width="15" height="15"> Action and Adventure
-            </a>
-            <a href="#">
-                <img src="/../media/filter/topselling.png" width="15" height="15"> Animation
-            </a>
-            <a href="#">
-                <img src="/../media/filter/newreleases.png" width="15" height="15"> Comedy
-            </a>
-            <a href="#">
-                <img src="/../media/filter/gooddeals.png" width="15" height="15"> Drama
-            </a>
-        </div>
-    </div>
         <h1 class="page_title">MOVIES</h1>
 
         <div id="content">
@@ -80,16 +63,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(movies[i]._id)) { %>
-                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (movies[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        $<%=movies[i].price%>
+                                                        <%=movies[i].price%>$
                                                             <% } %>
                                             </p>
                     </div>
