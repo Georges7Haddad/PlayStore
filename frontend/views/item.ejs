@@ -69,7 +69,7 @@
                     <%=item[0].description%>
                 </h4>
 
-                <% if(item[0].constructor.modelName==="Application" || "Game" ) {%>
+                <% if(item[0].constructor.modelName==="Application" || item[0].constructor.modelName=== "Game" ) {%>
                     <h2 class="titleBar"> Creator </h2>
                     <%=item[0].creator%>
                         <% } %>
@@ -145,10 +145,10 @@
                                                                         <% if (username) { %>
                                                                             <% if (reviews[i].likes.includes(username))
                                                                                 { %>
-                                                                                <a href="#"><i
+                                                                                <a href="#!"><i
                                                                                         class="fa fa-thumbs-up dislike"></i></a>
                                                                                 <% } else { %>
-                                                                                    <a href="#"><i
+                                                                                    <a href="#!"><i
                                                                                             class="fa fa-thumbs-up like"></i></a>
                                                                                     <% } %>
                                                                                         <% } else { %>

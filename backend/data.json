@@ -1,36 +1,4 @@
 {
-    "reviews": [
-        {
-            "user": "georges",
-            "rating": 8.8,
-            "itemId": "ef",
-            "text": "I laughed a lot when watching it. It's a great movie even though it's funny.",
-            "likes": [
-                "georges"
-            ],
-            "reports": 0
-        },
-        {
-            "user": "georges",
-            "rating": 7.5,
-            "itemId": "ef",
-            "text": "It was the best movie ever. Kevin Hart was my favorite actor😂 it kept me sitting up straight in my seat. You should totally watch it. You won't regret it. But first, get ready to laugh",
-            "likes": [
-                "georges"
-            ],
-            "reports": 1
-        },
-        {
-            "user": "georges",
-            "rating": 9.2,
-            "itemId": "ef",
-            "text": "This is my favorite movie it is the best ever i watched it too much time and i can't stop watching it but i don't have VIP to buy it but still best movie ever my teacher always play the movie at school thank you for posting this movie 😉",
-            "likes": [
-                "georges"
-            ],
-            "reports": 3
-        }
-    ],
     "movies": [
         {
             "title": "Jumanji: Welcome to the Jungle",
