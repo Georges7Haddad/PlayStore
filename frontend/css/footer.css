@@ -25,3 +25,18 @@ footer img {
 #userUsername {
   display: none;
 }
+
+.rightFooter {
+  position: relative;
+}
+#countryFlag {
+  position: absolute; 
+  bottom:14px; 
+  right: 10px;
+}
+#country {
+  position: absolute; bottom:0px; right: 50px;
+}
+.subscribe {
+  float: right; padding-right: 10px;
+}

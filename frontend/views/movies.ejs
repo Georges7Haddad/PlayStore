@@ -37,16 +37,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(moviesTopSelling[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (moviesTopSelling[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=moviesTopSelling[i].price%>$
+                                                        $<%=moviesTopSelling[i].price%>
                                                             <% } %>
                                             </p>
                     </div>
@@ -82,16 +82,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(moviesNewest[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (moviesNewest[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=moviesNewest[i].price%>$
+                                                        $<%=moviesNewest[i].price%>
                                                             <% } %>
                                             </p>
                     </div>

@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
 
 function like(event) {
   let target = event.target;
-  let review = target.parentElement.parentElement;
+  let review = target.parentElement.parentElement.parentElement;
   let reviewLikes = review.getElementsByClassName("reviewLikes")[0];
   reviewLikes.innerText = parseInt(reviewLikes.innerText) + 1;
   let reviewId = review
@@ -37,7 +37,7 @@ function like(event) {
 }
 function dislike(event) {
   let target = event.target;
-  let review = target.parentElement.parentElement;
+  let review = target.parentElement.parentElement.parentElement;
   let reviewLikes = review.getElementsByClassName("reviewLikes")[0];
   reviewLikes.innerText = parseInt(reviewLikes.innerText) - 1;
   let reviewId = review
@@ -74,7 +74,7 @@ function addReview() {
 
 function deleteReview(event) {
   let target = event.target;
-  let review = target.parentElement.parentElement;
+  let review = target.parentElement.parentElement.parentElement;
   let reviewId = review
     .getElementsByClassName("reviewId")[0]
     .innerText.replace(/\s/g, "");

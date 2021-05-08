@@ -56,16 +56,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(games[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (games[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=games[i].price%>$
+                                                        $<%=games[i].price%>
                                                             <% } %>
                                             </p>
                     </div>

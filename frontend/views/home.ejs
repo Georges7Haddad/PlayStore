@@ -31,16 +31,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(topSellingApplications[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (topSellingApplications[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=topSellingApplications[i].price%>$
+                                                        $<%=topSellingApplications[i].price%>
                                                             <% } %>
                                             </p>
                     </div>
@@ -74,16 +74,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(topSellingMovies[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (topSellingMovies[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=topSellingMovies[i].price%>$
+                                                        $<%=topSellingMovies[i].price%>
                                                             <% } %>
                                             </p>
                     </div>
@@ -111,16 +111,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(newestGames[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (newestGames[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=newestGames[i].price%>$
+                                                        $<%=newestGames[i].price%>
                                                             <% } %>
                                             </p>
                     </div>
@@ -147,16 +147,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(newestBooks[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (newestBooks[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=newestBooks[i].price%>$
+                                                        $<%=newestBooks[i].price%>
                                                             <% } %>
                                             </p>
                     </div>

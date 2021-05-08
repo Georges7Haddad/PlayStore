@@ -648,8 +648,6 @@ function addData() {
       console.log(err);
     }
     data = JSON.parse(data);
-    users = data["users"];
-    reviews = data["reviews"];
     movies = data["movies"];
     books = data["books"];
     applications = data["applications"];
@@ -658,6 +656,5 @@ function addData() {
     addItems(movies, Movie);
     addItems(games, Game);
     addItems(applications, Application);
-    addItems(reviews, Review);
   });
 }

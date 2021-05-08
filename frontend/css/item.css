@@ -28,6 +28,26 @@
   color: white;
   text-align: center;
 }
+
+.review {
+  position: relative; 
+  background-color: rgb(196, 196, 196); 
+  margin: 10px; 
+  padding-left: 10px;
+}
+.reviewUser {
+  font-size:16px; 
+  font-weight: bolder;
+}
+.reviewTrash {
+  float: right; 
+  padding: 10px;
+}
+.reviewThumb {
+  position: absolute; 
+  bottom:10px; 
+  right: 10px;
+}
 #reviewTextArea, .review .reviewText,
 .reviewLikes,
 .reviewUser,
@@ -42,4 +62,12 @@
 }
 .review .fa-trash{
   margin-left: 5%;
+}
+
+.textboxReview {
+  width: 100%;
+}
+
+.buttonReview {
+  float: right;
 }

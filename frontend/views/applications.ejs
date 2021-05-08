@@ -31,16 +31,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(applicationsTopSelling[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (applicationsTopSelling[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=applicationsTopSelling[i].price%>$
+                                                        $<%=applicationsTopSelling[i].price%>
                                                             <% } %>
                                             </p>
                     </div>
@@ -67,16 +67,16 @@
                         </p>
                         <% if (username) { %>
                             <% if (wishlist.includes(applicationsNewest[i]._id)) { %>
-                                <a href="#"><i class="fa fa-bookmark bookmark"></i></a>
+                                <a href="#!"><i class="fa fa-bookmark bookmark"></i></a>
                                 <% } else { %>
-                                    <a href="#"><i class="fa fa-bookmark-o bookmark"></i></a>
+                                    <a href="#!"><i class="fa fa-bookmark-o bookmark"></i></a>
                                     <% } %>
                                         <% } %>
                                             <p class="itemPrice">
                                                 <% if (applicationsNewest[i].price===0) { %>
                                                     Free
                                                     <% } else { %>
-                                                        <%=applicationsNewest[i].price%>$
+                                                        $<%=applicationsNewest[i].price%>
                                                             <% } %>
                                             </p>
                     </div>
