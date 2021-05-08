@@ -24,7 +24,22 @@
 }
 
 .titleBar {
-  background-color: #657e95; 
-  color: white; 
+  background-color: #657e95;
+  color: white;
   text-align: center;
+}
+#reviewTextArea, .review .reviewText,
+.reviewLikes,
+.reviewUser,
+.reviewRating {
+  display: inline-block;
+}
+.review .reviewText {
+  width: 80%;
+}
+.review .reviewUser {
+  font-size: x-large;
+}
+.review .fa-trash{
+  margin-left: 5%;
 }

@@ -1,11 +1,13 @@
 window.addEventListener("load", () => {
-  let sortButtons = document
-    .getElementById("sortDiv")
-    .getElementsByTagName("a");
-  sortButtons[0].addEventListener("click", sortByRating);
-  sortButtons[1].addEventListener("click", sortByTopSelling);
-  sortButtons[2].addEventListener("click", sortByRelease);
-  sortButtons[3].addEventListener("click", sortByPrice);
+  if (document.getElementById("sortDiv")) {
+    let sortButtons = document
+      .getElementById("sortDiv")
+      .getElementsByTagName("a");
+    sortButtons[0].addEventListener("click", sortByRating);
+    sortButtons[1].addEventListener("click", sortByTopSelling);
+    sortButtons[2].addEventListener("click", sortByRelease);
+    sortButtons[3].addEventListener("click", sortByPrice);
+  }
 });
 
 function sortByRating() {

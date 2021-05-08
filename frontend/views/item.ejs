@@ -8,7 +8,7 @@
     <%- include('headImports')%>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
             integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-</head> 
+</head>
 
 <body>
     <%- include('navbar')%>
@@ -29,102 +29,139 @@
                 <button id="userFormButton"></button>
             </form>
         </div>
-
-
-        <div class="item_box">
-            <div class="photo_title">
-                <div class="movieImageDiv">
-                    <% if ("Movie".includes(item[0].constructor.modelName)) { %>
-                        <div class="overlay">
-                            <a href="<%=item[0].trailerLink%>" target="_blank" class="playIcon" title="Play">
-                                <i class="fa fa-play-circle-o"></i>
-                            </a>
-                        </div>
-                        <% } %>
-                            <img class="itemPageImg" src="<%=item[0].image%>" alt="Image">
-                </div>
-                
-
-                <div class="details">
-                    <h1>
-                        <%=item[0].title%>
-                    </h1>
-                    <p><i class="fas fa-star"></i> Average Rating: <%=item[0].averageRating%> / 10</p>
-                    <p><i class="fas fa-user"></i> Number of Reviews:<%= reviews.length %></p>
-                    <p><i class="fas fa-tag"></i> Price:
-                        <% if (item[0].price===0) { %>
-                            Free
-                            <% } else { %>
-                                $<%=item[0].price%>
-                                    <% } %>
-
-                    </p>
-                    <p><i class="fas fa-theater-masks"></i> Genre: <%=item[0].genre%>
-
-                </div>
-            </div>
-            <h2 class="titleBar"> Description </h2>
-            <h4>
-                <%=item[0].description%>
-            </h4>
-
-            <% if(item[0].constructor.modelName === "Application" || "Game") {%>
-                <h2 class="titleBar"> Creator </h2> 
-                <%=item[0].creator%> <% } %> 
-            <% if(item[0].constructor.modelName === "Book"){%>
-                <h2 class="titleBar"> Author </h2> 
-                <%=item[0].author%> <% } %> 
-            <% if(item[0].constructor.modelName == "Movie"){%>
-
-            <h2 class="titleBar"> Cast and Credits </h2>
-
-            <h4>
-                <ul>
-                    <li><% if (item[0].castAndCredits.actors.length != 0) {%>
-                    Actors: <%=item[0].castAndCredits.actors%>
-                    <% } %> </li><br>
-
-                 <li><% if (item[0].castAndCredits.producers.length != 0) {%>
-                    Producer(s): <%=item[0].castAndCredits.producers%>
-                 <% } %></li><br>
-
-                 <li><% if (item[0].castAndCredits.Director.length != 0) {%>
-                    Director: <%=item[0].castAndCredits.Director%>
-                 <% } %></li><br>
-                </ul>
-            </h4>
-            <% } %> 
-
-            <h2 class="titleBar"> Reviews </h2>
-
-            <% for (var i=0;i<reviews.length;i++) {%>
-                <div class="review">
-                    <p class="reviewId">
-                        <%=reviews[i]._id%>
-                    </p>
-                    <p>
-                        <%=reviews[i].text%>
-                    </p>
-                    <p>
-                        <%=reviews[i].likes%>
-                    </p>
-                    <br>
-                    <% if (username) { %>
-                        <% if (reviews[i].likes.includes(username)) { %>
-                            <a href="#"><i class="fa fa-thumbs-up dislike"></i></a>
-                            <% } else { %>
-                                <a href="#"><i class="fa fa-thumbs-up like"></i></a>
-                                <% } %>
-                                    <% } %>
-                                        <%} %>
-                                            <br>
-                </div>
-        </div>
-
         <div id="content">
+            <div class="item_box">
+                <div class="photo_title">
+                    <div class="movieImageDiv">
+                        <% if ("Movie".includes(item[0].constructor.modelName)) { %>
+                            <div class="overlay">
+                                <a href="<%=item[0].trailerLink%>" target="_blank" class="playIcon" title="Play">
+                                    <i class="fa fa-play-circle-o"></i>
+                                </a>
+                            </div>
+                            <% } %>
+                                <img class="itemPageImg" src="<%=item[0].image%>" alt="Image">
+                    </div>
 
-            <%- include('footer')%>
+
+                    <div class="details">
+                        <h1>
+                            <%=item[0].title%>
+                        </h1>
+                        <p><i class="fas fa-star"></i> Average Rating: <%=item[0].averageRating%> / 10</p>
+                        <p><i class="fas fa-user"></i> Number of Reviews:<%= reviews.length %>
+                        </p>
+                        <p><i class="fas fa-tag"></i> Price:
+                            <% if (item[0].price===0) { %>
+                                Free
+                                <% } else { %>
+                                    $<%=item[0].price%>
+                                        <% } %>
+
+                        </p>
+                        <p><i class="fas fa-theater-masks"></i> Genre: <%=item[0].genre%>
+
+                    </div>
+                </div>
+                <h2 class="titleBar"> Description </h2>
+                <h4>
+                    <%=item[0].description%>
+                </h4>
+
+                <% if(item[0].constructor.modelName==="Application" || "Game" ) {%>
+                    <h2 class="titleBar"> Creator </h2>
+                    <%=item[0].creator%>
+                        <% } %>
+                            <% if(item[0].constructor.modelName==="Book" ){%>
+                                <h2 class="titleBar"> Author </h2>
+                                <%=item[0].author%>
+                                    <% } %>
+                                        <% if(item[0].constructor.modelName=="Movie" ){%>
+
+                                            <h2 class="titleBar"> Cast and Credits </h2>
+
+                                            <h4>
+                                                <ul>
+                                                    <li>
+                                                        <% if (item[0].castAndCredits.actors.length !=0) {%>
+                                                            Actors: <%=item[0].castAndCredits.actors%>
+                                                                <% } %>
+                                                    </li><br>
+
+                                                    <li>
+                                                        <% if (item[0].castAndCredits.producers.length !=0) {%>
+                                                            Producer(s): <%=item[0].castAndCredits.producers%>
+                                                                <% } %>
+                                                    </li><br>
+
+                                                    <li>
+                                                        <% if (item[0].castAndCredits.Director.length !=0) {%>
+                                                            Director: <%=item[0].castAndCredits.Director%>
+                                                                <% } %>
+                                                    </li><br>
+                                                </ul>
+                                            </h4>
+                                            <% } %>
+
+
+                                                <h2 class="titleBar"> Reviews </h2>
+                                                <% if (username) { %>
+                                                    <form action="">
+                                                        <textarea name="reviewText" placeholder="Leave a Review"
+                                                            id="reviewTextArea" cols="150" rows="5"></textarea><br>
+                                                        <label for="ratingInput">Rating</label>
+                                                        <input id="ratingInput" type="number" step="0.1" min="0"
+                                                            max="10">
+                                                        <button type="button" id="addReviewButton"
+                                                            class="dropbtn">Submit</button>
+                                                    </form>
+                                                    <%} %>
+
+
+                                                        <% for (var i=0;i<reviews.length;i++) {%>
+                                                            <div class="review">
+                                                                <p class="reviewUser">
+                                                                    <%=reviews[i].user%>
+                                                                </p>
+                                                                <p class="reviewRating">
+                                                                    <%=reviews[i].rating%>
+                                                                </p>
+                                                                <i class="fa fa-star"></i>
+                                                                <% if (username===reviews[i].user) { %>
+                                                                    <a href="#"><i class="fa fa-trash"></i></a>
+                                                                    <%} %>
+                                                                        <br>
+                                                                        <p class="reviewId">
+                                                                            <%=reviews[i]._id%>
+                                                                        </p>
+                                                                        <p class="reviewText">
+                                                                            <%=reviews[i].text%>
+                                                                        </p>
+                                                                        <p class="reviewLikes">
+                                                                            <%=reviews[i].likes.length%>
+                                                                        </p>
+
+                                                                        <% if (username) { %>
+                                                                            <% if (reviews[i].likes.includes(username))
+                                                                                { %>
+                                                                                <a href="#"><i
+                                                                                        class="fa fa-thumbs-up dislike"></i></a>
+                                                                                <% } else { %>
+                                                                                    <a href="#"><i
+                                                                                            class="fa fa-thumbs-up like"></i></a>
+                                                                                    <% } %>
+                                                                                        <% } else { %>
+                                                                                            <i
+                                                                                                class="fa fa-thumbs-up"></i>
+                                                                                            <% } %>
+                                                            </div>
+                                                            <% } %>
+            </div>
         </div>
+        </div>
+
+        <%- include('footer')%>
+            </div>
 </body>
 
 </html>

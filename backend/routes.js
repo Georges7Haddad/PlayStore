@@ -367,6 +367,28 @@ module.exports = function (app) {
     });
   });
 
+  app.post("/item/:itemId/review", (req, res) => {
+    let username = req.session.passport.user;
+    let reviewText = req.body.reviewText;
+    let reviewRating = req.body.reviewRating;
+    let itemId = req.params.itemId;
+    let review = new Review({
+      user: username,
+      rating: reviewRating,
+      text: reviewText,
+      itemId: itemId,
+    });
+    review.save();
+    res.send(`Review Added`);
+  });
+
+  app.delete("/item/:itemId/review/:reviewId", (req, res) => {
+    let reviewId = req.params.reviewId;
+    Review.deleteOne({ _id: ObjectID(reviewId) }).then(() =>
+      res.send("Review Deleted")
+    );
+  });
+
   app.post("/item/:reviewId/like", (req, res) => {
     if (req.session.passport) {
       let reviewId = req.params.reviewId;
