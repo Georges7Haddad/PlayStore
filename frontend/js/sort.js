@@ -8,7 +8,18 @@ window.addEventListener("load", () => {
     sortButtons[2].addEventListener("click", sortByRelease);
     sortButtons[3].addEventListener("click", sortByPrice);
   }
+  if (document.getElementById("filterDiv")) {
+    let sortButtons = document
+      .getElementById("filterDiv")
+      .getElementsByTagName("a");
+    sortButtons[0].addEventListener("click", test);
+    sortButtons[1].addEventListener("click", sortByTopSelling);
+    sortButtons[2].addEventListener("click", sortByRelease);
+    sortButtons[3].addEventListener("click", sortByPrice);
+  }
 });
+
+
 
 function sortByRating() {
   sort("itemRating");

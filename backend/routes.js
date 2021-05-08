@@ -90,7 +90,7 @@ module.exports = function (app) {
         if (user.profilePicture != "") {
           res.send({ isAuth: "true", user: user, pic: user.profilePicture });
         } else {
-          res.send({ isAuth: "true", user: user, pic: "default.jpg" });
+          res.send({ isAuth: "true", pic: "default.jpg", user: user });
         }
       });
     } else {
@@ -451,11 +451,21 @@ module.exports = function (app) {
         }
       })
       .then(() => {
-        res.render("../../frontend/views/lastVisited", {
-          wishlist: wishlist,
-          last24VisitedItems: last24VisitedItems,
-          username: req.session.passport.user,
-        });
+        if (User.findOne({ username: username }).profilePicture != "") {
+          res.render("../../frontend/views/lastVisited", {
+            wishlist: wishlist,
+            last24VisitedItems: last24VisitedItems,
+            username: username,
+            pic: User.findOne({ username: username }).profilePicture
+          });
+        } else {
+          res.render("../../frontend/views/lastVisited", {
+            wishlist: wishlist,
+            last24VisitedItems: last24VisitedItems,
+            username: username,
+            pic: 'default.jpg'
+          });
+        }
       });
   });
 
@@ -499,7 +509,7 @@ module.exports = function (app) {
       .then(() => {
         res.render("../../frontend/views/wishlist", {
           wishlist: wishlist,
-          username: req.session.passport.user,
+          username: username,
         });
       });
   });

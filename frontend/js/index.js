@@ -25,8 +25,16 @@ function isAuth() {
     response.json().then(function (data) {
       authenticated = data.isAuth;
       if (authenticated === "true") {
+        var url = window.location.toString();
+        var flag = url.indexOf(data.user.username);
         user = data.user;
-        $("pp").src="../media/pics/" + data.pic
+        
+        if(flag !== -1){
+          $("pp").src="../../media/pics/" + data.pic
+        }
+        else{
+          $("pp").src="../media/pics/" + data.pic
+        }
         $("pp").style.display = "";
         $("signupNavButton").style.display = "none";
         $("loginNavButton").style.display = "none";
