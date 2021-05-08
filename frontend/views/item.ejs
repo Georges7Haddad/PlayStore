@@ -69,7 +69,7 @@
                     <%=item[0].description%>
                 </h4>
 
-                <% if(item[0].constructor.modelName==="Application" || item[0].constructor.modelName=== "Game" ) {%>
+                <% if(item[0].constructor.modelName==="Application" || item[0].constructor.modelName==="Game" ) {%>
                     <h2 class="titleBar"> Creator </h2>
                     <%=item[0].creator%>
                         <% } %>
@@ -106,16 +106,18 @@
 
 
                                                 <h2 class="titleBar"> Reviews </h2>
+
                                                 <% if (username) { %>
                                                     <form action="">
                                                         <textarea name="reviewText" placeholder="Leave a Review"
-                                                            id="reviewTextArea" cols="150" rows="5"></textarea><br>
+                                                            id="reviewTextArea" rows="5"
+                                                            style="width: 100%"></textarea><br>
                                                         <label for="ratingInput">Rating</label>
                                                         <input id="ratingInput" type="number" step="0.1" min="0"
                                                             max="10">
                                                         <button type="button" id="addReviewButton"
-                                                            class="dropbtn">Submit</button>
-                                                    </form>
+                                                            class="dropbtn buttonReview">Submit</button>
+                                                    </form><br><br><br>
                                                     <%} %>
 
 
@@ -129,7 +131,8 @@
                                                                 </p>
                                                                 <i class="fa fa-star"></i>
                                                                 <% if (username===reviews[i].user) { %>
-                                                                    <a href="#"><i class="fa fa-trash"></i></a>
+                                                                    <a href="#!"><i
+                                                                            class="fa fa-trash reviewTrash"></i></a>
                                                                     <%} %>
                                                                         <br>
                                                                         <p class="reviewId">
@@ -138,23 +141,25 @@
                                                                         <p class="reviewText">
                                                                             <%=reviews[i].text%>
                                                                         </p>
-                                                                        <p class="reviewLikes">
-                                                                            <%=reviews[i].likes.length%>
-                                                                        </p>
-
-                                                                        <% if (username) { %>
-                                                                            <% if (reviews[i].likes.includes(username))
-                                                                                { %>
-                                                                                <a href="#!"><i
-                                                                                        class="fa fa-thumbs-up dislike"></i></a>
-                                                                                <% } else { %>
+                                                                        <div class="reviewThumb">
+                                                                            <p class="reviewLikes">
+                                                                                <%=reviews[i].likes.length%>
+                                                                            </p>
+                                                                            <% if (username) { %>
+                                                                                <% if
+                                                                                    (reviews[i].likes.includes(username))
+                                                                                    { %>
                                                                                     <a href="#!"><i
-                                                                                            class="fa fa-thumbs-up like"></i></a>
-                                                                                    <% } %>
-                                                                                        <% } else { %>
-                                                                                            <i
-                                                                                                class="fa fa-thumbs-up"></i>
-                                                                                            <% } %>
+                                                                                            class="fa fa-thumbs-up dislike"></i></a>
+                                                                                    <% } else { %>
+                                                                                        <a href="#!"><i
+                                                                                                class="fa fa-thumbs-up like"></i></a>
+                                                                                        <% } %>
+                                                                                            <% } else { %>
+                                                                                                <i
+                                                                                                    class="fa fa-thumbs-up"></i>
+                                                                                                <% } %>
+                                                                        </div>
                                                             </div>
                                                             <% } %>
             </div>

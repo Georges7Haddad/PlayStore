@@ -9,6 +9,11 @@
   margin: 20px;
   border-radius: 10px;
 }
+#pp2 {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+}
 nav {
   padding: 5px 30px;
   background-color: #657e95;
