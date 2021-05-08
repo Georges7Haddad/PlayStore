@@ -51,14 +51,15 @@
                         <p><i class="fas fa-star"></i> Average Rating: <%=item[0].averageRating%> / 10</p>
                         <p><i class="fas fa-user"></i> Number of Reviews:<%= reviews.length %>
                         </p>
-                        <p><i class="fas fa-tag"></i> Price:
-                            <% if (item[0].price===0) { %>
-                                Free
-                                <% } else { %>
-                                    $<%=item[0].price%>
-                                        <% } %>
-
-                        </p>
+                        <div> <i class="fas fa-tag"></i> Price:
+                            <p class="itemPrice">
+                                <% if (item[0].price===0) { %>
+                                    Free
+                                    <% } else { %>
+                                        $<%=item[0].price%>
+                                            <% } %>
+                            </p>
+                        </div>
                         <p><i class="fas fa-theater-masks"></i> Genre: <%=item[0].genre%>
 
                     </div>

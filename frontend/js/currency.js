@@ -10,7 +10,7 @@ function changeToUSD() {
     if (price.includes("$")) break;
     if (price === "Free") continue;
     price = parseInt(price.match(/\d+/)) / 1500;
-    prices[i].innerText = price + "$";
+    prices[i].innerText = "$" + price;
   }
 }
 

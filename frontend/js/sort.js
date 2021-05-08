@@ -24,24 +24,24 @@ function sortByPrice() {
 }
 function sort(type) {
   let items = document.getElementsByClassName("itemBox");
-  let itemsRating = document.getElementsByClassName(type);
+  let itemsType = document.getElementsByClassName(type);
   let results = [];
   if (type === "itemPrice") {
     for (let i = 0; i < items.length; i++) {
-      price = itemsRating[i].innerHTML.includes("Free")
+      price = itemsType[i].innerHTML.includes("Free")
         ? 0
-        : parseFloat(itemsRating[i].innerHTML);
+        : parseFloat(itemsType[i].innerHTML.replace("$", ""));
       results.push([items[i], price]);
     }
     results = sortArrayOfArrays(results, true);
   } else if (type === "itemDate") {
     for (let i = 0; i < items.length; i++) {
-      results.push([items[i], Date.parse(itemsRating[i].innerHTML)]);
+      results.push([items[i], Date.parse(itemsType[i].innerHTML)]);
     }
     results = sortArrayOfArrays(results, false);
   } else {
     for (let i = 0; i < items.length; i++) {
-      results.push([items[i], parseFloat(itemsRating[i].innerHTML)]);
+      results.push([items[i], parseFloat(itemsType[i].innerHTML)]);
     }
     results = sortArrayOfArrays(results, false);
   }
